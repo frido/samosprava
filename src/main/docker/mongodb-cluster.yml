@@ -1,0 +1,16 @@
+version: '2'
+services:
+  samosprava-mongodb:
+    image: mongo:4.0.10
+    ports:
+      - '27017:27017'
+    command: mongos --configdb samosprava-mongodb-config
+  samosprava-mongodb-node:
+    build:
+      context: .
+      dockerfile: mongodb/MongoDB.Dockerfile
+    command: mongod --replSet rs1 --noprealloc --smallfiles
+  samosprava-mongodb-config:
+    image: mongo:4.0.10
+    container_name: samosprava-mongodb-config
+    command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

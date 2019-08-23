@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "frido.samosprava"
+    },
+    "jhipsterVersion": "6.2.0",
+    "applicationType": "monolith",
+    "baseName": "samosprava",
+    "packageName": "frido.samosprava",
+    "packageFolder": "frido/samosprava",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MWQ4OGQ0NjdjOWRmZDY0MzBkNzljMzM4YTQ2MDIzMzIzNzljMDA2NjE5MjMyNWM2ZDg5ZDllM2U5NDI3MmYxZDM5MDQ2Y2QwMzliNWZkY2VkYTI1ZmZmOWJjNTJiMWU0MjZkMjIwYzY5NDhlM2IwYzY2ZGIwY2ZiNGZlNGIzZWE=",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "flatly",
+    "clientThemeVariant": "primary",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
