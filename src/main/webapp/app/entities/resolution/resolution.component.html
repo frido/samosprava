@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span>Resolutions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resolution" [routerLink]="['/resolution/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Resolution
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="resolutions?.length === 0">
+        <span>No resolutions found</span>
+    </div>
+    <div class="table-responsive" *ngIf="resolutions?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Key</span></th>
+            <th><span>Number</span></th>
+            <th><span>Type</span></th>
+            <th><span>Council Key</span></th>
+            <th><span>Creator Key</span></th>
+            <th><span>Title</span></th>
+            <th><span>Description</span></th>
+            <th><span>Vote For</span></th>
+            <th><span>Vote Against</span></th>
+            <th><span>Presented</span></th>
+            <th><span>Source</span></th>
+            <th><span>Meeting</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let resolution of resolutions ;trackBy: trackId">
+                <td><a [routerLink]="['/resolution', resolution.id, 'view' ]">{{resolution.id}}</a></td>
+                <td>{{resolution.key}}</td>
+                <td>{{resolution.number}}</td>
+                <td>{{resolution.type}}</td>
+                <td>{{resolution.councilKey}}</td>
+                <td>{{resolution.creatorKey}}</td>
+                <td>{{resolution.title}}</td>
+                <td>{{resolution.description}}</td>
+                <td>{{resolution.voteFor}}</td>
+                <td>{{resolution.voteAgainst}}</td>
+                <td>{{resolution.presented}}</td>
+                <td>{{resolution.source}}</td>
+                <td>
+                    <div *ngIf="resolution.meeting">
+                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view' ]" >{{resolution.meeting?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/resolution', resolution.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/resolution', resolution.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/resolution', { outlets: { popup: resolution.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

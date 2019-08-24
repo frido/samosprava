@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IMeeting, Meeting } from 'app/shared/model/meeting.model';
 import { MeetingService } from './meeting.service';
 
@@ -13,7 +14,6 @@ import { MeetingService } from './meeting.service';
 })
 export class MeetingUpdateComponent implements OnInit {
   isSaving: boolean;
-  dateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -37,7 +37,7 @@ export class MeetingUpdateComponent implements OnInit {
       id: meeting.id,
       key: meeting.key,
       councilKey: meeting.councilKey,
-      date: meeting.date,
+      date: meeting.date != null ? meeting.date.format(DATE_TIME_FORMAT) : null,
       place: meeting.place
     });
   }
@@ -62,7 +62,7 @@ export class MeetingUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       key: this.editForm.get(['key']).value,
       councilKey: this.editForm.get(['councilKey']).value,
-      date: this.editForm.get(['date']).value,
+      date: this.editForm.get(['date']).value != null ? moment(this.editForm.get(['date']).value, DATE_TIME_FORMAT) : undefined,
       place: this.editForm.get(['place']).value
     };
   }

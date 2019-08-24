@@ -11,14 +11,21 @@
         },
         {
             "fieldName": "date",
-            "fieldType": "LocalDate"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "place",
             "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "meeting",
+            "relationshipName": "resolution"
+        }
+    ],
     "changelogDate": "20190824041444",
     "entityTableName": "meeting",
     "dto": "no",

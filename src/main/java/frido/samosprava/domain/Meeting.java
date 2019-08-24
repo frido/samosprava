@@ -2,9 +2,12 @@ package frido.samosprava.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Meeting.
@@ -24,10 +27,14 @@ public class Meeting implements Serializable {
     private Long councilKey;
 
     @Field("date")
-    private LocalDate date;
+    private Instant date;
 
     @Field("place")
     private String place;
+
+    @DBRef
+    @Field("resolution")
+    private Set<Resolution> resolutions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -64,16 +71,16 @@ public class Meeting implements Serializable {
         this.councilKey = councilKey;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public Meeting date(LocalDate date) {
+    public Meeting date(Instant date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
@@ -88,6 +95,31 @@ public class Meeting implements Serializable {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public Set<Resolution> getResolutions() {
+        return resolutions;
+    }
+
+    public Meeting resolutions(Set<Resolution> resolutions) {
+        this.resolutions = resolutions;
+        return this;
+    }
+
+    public Meeting addResolution(Resolution resolution) {
+        this.resolutions.add(resolution);
+        resolution.setMeeting(this);
+        return this;
+    }
+
+    public Meeting removeResolution(Resolution resolution) {
+        this.resolutions.remove(resolution);
+        resolution.setMeeting(null);
+        return this;
+    }
+
+    public void setResolutions(Set<Resolution> resolutions) {
+        this.resolutions = resolutions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

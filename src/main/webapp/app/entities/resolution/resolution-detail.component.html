@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resolution">
+            <h2><span>Resolution</span> {{resolution.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Key</span></dt>
+                <dd>
+                    <span>{{resolution.key}}</span>
+                </dd>
+                <dt><span>Number</span></dt>
+                <dd>
+                    <span>{{resolution.number}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{resolution.type}}</span>
+                </dd>
+                <dt><span>Council Key</span></dt>
+                <dd>
+                    <span>{{resolution.councilKey}}</span>
+                </dd>
+                <dt><span>Creator Key</span></dt>
+                <dd>
+                    <span>{{resolution.creatorKey}}</span>
+                </dd>
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{resolution.title}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{resolution.description}}</span>
+                </dd>
+                <dt><span>Vote For</span></dt>
+                <dd>
+                    <span>{{resolution.voteFor}}</span>
+                </dd>
+                <dt><span>Vote Against</span></dt>
+                <dd>
+                    <span>{{resolution.voteAgainst}}</span>
+                </dd>
+                <dt><span>Presented</span></dt>
+                <dd>
+                    <span>{{resolution.presented}}</span>
+                </dd>
+                <dt><span>Source</span></dt>
+                <dd>
+                    <span>{{resolution.source}}</span>
+                </dd>
+                <dt><span>Meeting</span></dt>
+                <dd>
+                    <div *ngIf="resolution.meeting">
+                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view']">{{resolution.meeting?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/resolution', resolution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

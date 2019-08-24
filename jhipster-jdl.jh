@@ -1,6 +1,33 @@
 entity Meeting {
 	key Long
 	councilKey Long
-    date LocalDate
+    date Instant
     place String
+}
+
+entity Resolution {
+	key Long
+    number String
+    type ResolutionType
+    councilKey Long
+    creatorKey String
+    title String
+    description String
+    voteFor Integer
+    voteAgainst Integer
+    presented Integer
+    source String
+}
+
+entity Decision {
+	status String
+    description String
+}
+
+enum ResolutionType {
+	RENT, OTHER, PETITION, INFO, REQUEST, INSPECTION, PROJECT, BUDGET, REGION, TRANSFER, RESERVATION, VZN, CHOICE
+}
+
+relationship OneToMany {
+  Meeting{resolution} to Resolution{meeting}
 }

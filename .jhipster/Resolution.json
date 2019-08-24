@@ -1,0 +1,68 @@
+{
+    "name": "Resolution",
+    "fields": [
+        {
+            "fieldName": "key",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "number",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "ResolutionType",
+            "fieldValues": "RENT,OTHER,PETITION,INFO,REQUEST,INSPECTION,PROJECT,BUDGET,REGION,TRANSFER,RESERVATION,VZN,CHOICE"
+        },
+        {
+            "fieldName": "councilKey",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "creatorKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "voteFor",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "voteAgainst",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "presented",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "source",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "meeting",
+            "otherEntityRelationshipName": "resolution",
+            "relationshipName": "meeting",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190824053050",
+    "entityTableName": "resolution",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

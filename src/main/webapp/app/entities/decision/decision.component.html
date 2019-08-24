@@ -1,53 +1,49 @@
 <div>
     <h2 id="page-heading">
-        <span>Meetings</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-meeting" [routerLink]="['/meeting/new']">
+        <span>Decisions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-decision" [routerLink]="['/decision/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create a new Meeting
+            Create a new Decision
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="meetings?.length === 0">
-        <span>No meetings found</span>
+    <div class="alert alert-warning" *ngIf="decisions?.length === 0">
+        <span>No decisions found</span>
     </div>
-    <div class="table-responsive" *ngIf="meetings?.length > 0">
+    <div class="table-responsive" *ngIf="decisions?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Key</span></th>
-            <th><span>Council Key</span></th>
-            <th><span>Date</span></th>
-            <th><span>Place</span></th>
+            <th><span>Status</span></th>
+            <th><span>Description</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let meeting of meetings ;trackBy: trackId">
-                <td><a [routerLink]="['/meeting', meeting.id, 'view' ]">{{meeting.id}}</a></td>
-                <td>{{meeting.key}}</td>
-                <td>{{meeting.councilKey}}</td>
-                <td>{{meeting.date | date:'medium'}}</td>
-                <td>{{meeting.place}}</td>
+            <tr *ngFor="let decision of decisions ;trackBy: trackId">
+                <td><a [routerLink]="['/decision', decision.id, 'view' ]">{{decision.id}}</a></td>
+                <td>{{decision.status}}</td>
+                <td>{{decision.description}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
-                                [routerLink]="['/meeting', meeting.id, 'view' ]"
+                                [routerLink]="['/decision', decision.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/meeting', meeting.id, 'edit']"
+                                [routerLink]="['/decision', decision.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/meeting', { outlets: { popup: meeting.id + '/delete'} }]"
+                                [routerLink]="['/decision', { outlets: { popup: decision.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
