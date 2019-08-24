@@ -1,0 +1,45 @@
+{
+    "name": "CouncilRelation",
+    "fields": [
+        {
+            "fieldName": "from",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "to",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "CouncilRelationType",
+            "fieldValues": "CHAIRMAN,VICE_CHAIRMAN,Vice1,Vice2,Prednosta,Kontrolor"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "councilRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "council",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "councilRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "person",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190824193952",
+    "entityTableName": "council_relation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,45 @@
+{
+    "name": "DepartmentRelation",
+    "fields": [
+        {
+            "fieldName": "from",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "to",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "DepartmentRelationType",
+            "fieldValues": "SCHOOL_MEMBER,DIRECTOR,OFFICIAL,HEAD_OFFICIAL,SUPERVISOR,VICE_SUPERVISOR,HEAD_SUPERVISOR"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "department",
+            "otherEntityRelationshipName": "departmentRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "department",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "departmentRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "person",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190824193953",
+    "entityTableName": "department_relation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

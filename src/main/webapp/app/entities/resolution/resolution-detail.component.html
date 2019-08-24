@@ -5,10 +5,6 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Key</span></dt>
-                <dd>
-                    <span>{{resolution.key}}</span>
-                </dd>
                 <dt><span>Number</span></dt>
                 <dd>
                     <span>{{resolution.number}}</span>
@@ -16,14 +12,6 @@
                 <dt><span>Type</span></dt>
                 <dd>
                     <span>{{resolution.type}}</span>
-                </dd>
-                <dt><span>Council Key</span></dt>
-                <dd>
-                    <span>{{resolution.councilKey}}</span>
-                </dd>
-                <dt><span>Creator Key</span></dt>
-                <dd>
-                    <span>{{resolution.creatorKey}}</span>
                 </dd>
                 <dt><span>Title</span></dt>
                 <dd>
@@ -49,10 +37,22 @@
                 <dd>
                     <span>{{resolution.source}}</span>
                 </dd>
+                <dt><span>Creators</span></dt>
+                <dd>
+                    <span *ngFor="let creators of resolution.creators; let last = last">
+                        <a [routerLink]="['/person', creators?.id, 'view' ]">{{creators.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Council</span></dt>
+                <dd>
+                    <div *ngIf="resolution.council">
+                        <a [routerLink]="['/council', resolution.council?.id, 'view']">{{resolution.council?.name}}</a>
+                    </div>
+                </dd>
                 <dt><span>Meeting</span></dt>
                 <dd>
                     <div *ngIf="resolution.meeting">
-                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view']">{{resolution.meeting?.id}}</a>
+                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view']">{{resolution.meeting?.date}}</a>
                     </div>
                 </dd>
             </dl>

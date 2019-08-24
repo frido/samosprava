@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span>Votes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-vote" [routerLink]="['/vote/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Vote
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="votes?.length === 0">
+        <span>No votes found</span>
+    </div>
+    <div class="table-responsive" *ngIf="votes?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Party</span></th>
+            <th><span>Votes</span></th>
+            <th><span>Election</span></th>
+            <th><span>Person</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let vote of votes ;trackBy: trackId">
+                <td><a [routerLink]="['/vote', vote.id, 'view' ]">{{vote.id}}</a></td>
+                <td>{{vote.party}}</td>
+                <td>{{vote.votes}}</td>
+                <td>
+                    <div *ngIf="vote.election">
+                        <a [routerLink]="['/election', vote.election?.id, 'view' ]" >{{vote.election?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="vote.person">
+                        <a [routerLink]="['/person', vote.person?.id, 'view' ]" >{{vote.person?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/vote', vote.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/vote', vote.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/vote', { outlets: { popup: vote.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

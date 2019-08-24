@@ -1,0 +1,45 @@
+{
+    "name": "CommissionRelation",
+    "fields": [
+        {
+            "fieldName": "from",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "to",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "CommissionRelationType",
+            "fieldValues": "HEAD,MEMBER"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "commission",
+            "otherEntityRelationshipName": "commissionRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "commission",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "commissionRels",
+            "relationshipValidateRules": "required",
+            "relationshipName": "person",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190824193954",
+    "entityTableName": "commission_relation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

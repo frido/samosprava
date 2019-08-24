@@ -10,19 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_key">Key</label>
-                    <input type="number" class="form-control" name="key" id="field_key"
-                           formControlName="key"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_councilKey">Council Key</label>
-                    <input type="number" class="form-control" name="councilKey" id="field_councilKey"
-                           formControlName="councilKey"/>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
-                    <div class="d-flex">
-                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
+                    <div class="input-group">
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" formControlName="date"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -31,6 +24,19 @@
                            formControlName="place"/>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_council">Council</label>
+                    <select class="form-control" id="field_council" name="council" formControlName="council">
+                        <option *ngIf="!editForm.get('council').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="councilOption.id === editForm.get('council').value?.id ? editForm.get('council').value : councilOption" *ngFor="let councilOption of councils; trackBy: trackCouncilById">{{councilOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('council').invalid && (editForm.get('council').dirty || editForm.get('council').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('council').errors.required">
+                        This field is required.
+                    </small>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

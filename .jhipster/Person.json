@@ -1,0 +1,74 @@
+{
+    "name": "Person",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prefix",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "suffix",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "club",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "facebook",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "deputyRelation",
+            "otherEntityRelationshipName": "person",
+            "relationshipName": "deputyRels"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vote",
+            "otherEntityRelationshipName": "person",
+            "relationshipName": "votes"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "councilRelation",
+            "otherEntityRelationshipName": "person",
+            "relationshipName": "councilRels"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "departmentRelation",
+            "otherEntityRelationshipName": "person",
+            "relationshipName": "departmentRels"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commissionRelation",
+            "otherEntityRelationshipName": "person",
+            "relationshipName": "commissionRels"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "creators",
+            "relationshipName": "creatorsOf",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190824193957",
+    "entityTableName": "person",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

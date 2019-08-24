@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Councils</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-council" [routerLink]="['/council/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Council
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="councils?.length === 0">
+        <span>No councils found</span>
+    </div>
+    <div class="table-responsive" *ngIf="councils?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Key</span></th>
+            <th><span>Name</span></th>
+            <th><span>Deputy Title</span></th>
+            <th><span>Mayor Title</span></th>
+            <th><span>Office Title</span></th>
+            <th><span>Fb Title</span></th>
+            <th><span>Fb Link</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let council of councils ;trackBy: trackId">
+                <td><a [routerLink]="['/council', council.id, 'view' ]">{{council.id}}</a></td>
+                <td>{{council.key}}</td>
+                <td>{{council.name}}</td>
+                <td>{{council.deputyTitle}}</td>
+                <td>{{council.mayorTitle}}</td>
+                <td>{{council.officeTitle}}</td>
+                <td>{{council.fbTitle}}</td>
+                <td>{{council.fbLink}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/council', council.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/council', council.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/council', { outlets: { popup: council.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

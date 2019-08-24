@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { MeetingService } from 'app/entities/meeting/meeting.service';
 import { IMeeting, Meeting } from 'app/shared/model/meeting.model';
 
@@ -27,14 +27,14 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Meeting('ID', 0, 0, currentDate, 'AAAAAAA');
+      elemDefault = new Meeting('ID', currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            date: currentDate.format(DATE_TIME_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -52,7 +52,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 'ID',
-            date: currentDate.format(DATE_TIME_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -74,9 +74,7 @@ describe('Service Tests', () => {
       it('should update a Meeting', async () => {
         const returnedFromService = Object.assign(
           {
-            key: 1,
-            councilKey: 1,
-            date: currentDate.format(DATE_TIME_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             place: 'BBBBBB'
           },
           elemDefault
@@ -100,9 +98,7 @@ describe('Service Tests', () => {
       it('should return a list of Meeting', async () => {
         const returnedFromService = Object.assign(
           {
-            key: 1,
-            councilKey: 1,
-            date: currentDate.format(DATE_TIME_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             place: 'BBBBBB'
           },
           elemDefault

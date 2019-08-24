@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-commission-relation-heading">Create or edit a Commission Relation</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_from">From</label>
+                    <div class="input-group">
+                        <input id="field_from" type="text" class="form-control" name="from" ngbDatepicker  #fromDp="ngbDatepicker" formControlName="from"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fromDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_to">To</label>
+                    <div class="input-group">
+                        <input id="field_to" type="text" class="form-control" name="to" ngbDatepicker  #toDp="ngbDatepicker" formControlName="to"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="toDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="HEAD">HEAD</option>
+                        <option value="MEMBER">MEMBER</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_commission">Commission</label>
+                    <select class="form-control" id="field_commission" name="commission" formControlName="commission">
+                        <option *ngIf="!editForm.get('commission').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="commissionOption.id === editForm.get('commission').value?.id ? editForm.get('commission').value : commissionOption" *ngFor="let commissionOption of commissions; trackBy: trackCommissionById">{{commissionOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('commission').invalid && (editForm.get('commission').dirty || editForm.get('commission').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('commission').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_person">Person</label>
+                    <select class="form-control" id="field_person" name="person" formControlName="person">
+                        <option *ngIf="!editForm.get('person').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="personOption.id === editForm.get('person').value?.id ? editForm.get('person').value : personOption" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('person').invalid && (editForm.get('person').dirty || editForm.get('person').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('person').errors.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

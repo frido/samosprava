@@ -3,10 +3,13 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 import { IMeeting, Meeting } from 'app/shared/model/meeting.model';
 import { MeetingService } from './meeting.service';
+import { ICouncil } from 'app/shared/model/council.model';
+import { CouncilService } from 'app/entities/council';
 
 @Component({
   selector: 'jhi-meeting-update',
@@ -15,30 +18,44 @@ import { MeetingService } from './meeting.service';
 export class MeetingUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  councils: ICouncil[];
+  dateDp: any;
+
   editForm = this.fb.group({
     id: [],
-    key: [],
-    councilKey: [],
     date: [],
-    place: []
+    place: [],
+    council: [null, Validators.required]
   });
 
-  constructor(protected meetingService: MeetingService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected meetingService: MeetingService,
+    protected councilService: CouncilService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ meeting }) => {
       this.updateForm(meeting);
     });
+    this.councilService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ICouncil[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ICouncil[]>) => response.body)
+      )
+      .subscribe((res: ICouncil[]) => (this.councils = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(meeting: IMeeting) {
     this.editForm.patchValue({
       id: meeting.id,
-      key: meeting.key,
-      councilKey: meeting.councilKey,
-      date: meeting.date != null ? meeting.date.format(DATE_TIME_FORMAT) : null,
-      place: meeting.place
+      date: meeting.date,
+      place: meeting.place,
+      council: meeting.council
     });
   }
 
@@ -60,10 +77,9 @@ export class MeetingUpdateComponent implements OnInit {
     return {
       ...new Meeting(),
       id: this.editForm.get(['id']).value,
-      key: this.editForm.get(['key']).value,
-      councilKey: this.editForm.get(['councilKey']).value,
-      date: this.editForm.get(['date']).value != null ? moment(this.editForm.get(['date']).value, DATE_TIME_FORMAT) : undefined,
-      place: this.editForm.get(['place']).value
+      date: this.editForm.get(['date']).value,
+      place: this.editForm.get(['place']).value,
+      council: this.editForm.get(['council']).value
     };
   }
 
@@ -78,5 +94,12 @@ export class MeetingUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackCouncilById(index: number, item: ICouncil) {
+    return item.id;
   }
 }

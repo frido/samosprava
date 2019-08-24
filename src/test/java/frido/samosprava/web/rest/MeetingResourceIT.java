@@ -2,6 +2,7 @@ package frido.samosprava.web.rest;
 
 import frido.samosprava.SamospravaApp;
 import frido.samosprava.domain.Meeting;
+import frido.samosprava.domain.Council;
 import frido.samosprava.repository.MeetingRepository;
 import frido.samosprava.web.rest.errors.ExceptionTranslator;
 
@@ -18,8 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static frido.samosprava.web.rest.TestUtil.createFormattingConversionService;
@@ -34,17 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SamospravaApp.class)
 public class MeetingResourceIT {
 
-    private static final Long DEFAULT_KEY = 1L;
-    private static final Long UPDATED_KEY = 2L;
-    private static final Long SMALLER_KEY = 1L - 1L;
-
-    private static final Long DEFAULT_COUNCIL_KEY = 1L;
-    private static final Long UPDATED_COUNCIL_KEY = 2L;
-    private static final Long SMALLER_COUNCIL_KEY = 1L - 1L;
-
-    private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-    private static final Instant SMALLER_DATE = Instant.ofEpochMilli(-1L);
+    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final String DEFAULT_PLACE = "AAAAAAAAAA";
     private static final String UPDATED_PLACE = "BBBBBBBBBB";
@@ -88,10 +81,13 @@ public class MeetingResourceIT {
      */
     public static Meeting createEntity() {
         Meeting meeting = new Meeting()
-            .key(DEFAULT_KEY)
-            .councilKey(DEFAULT_COUNCIL_KEY)
             .date(DEFAULT_DATE)
             .place(DEFAULT_PLACE);
+        // Add required entity
+        Council council;
+        council = CouncilResourceIT.createEntity();
+        council.setId("fixed-id-for-tests");
+        meeting.setCouncil(council);
         return meeting;
     }
     /**
@@ -102,10 +98,13 @@ public class MeetingResourceIT {
      */
     public static Meeting createUpdatedEntity() {
         Meeting meeting = new Meeting()
-            .key(UPDATED_KEY)
-            .councilKey(UPDATED_COUNCIL_KEY)
             .date(UPDATED_DATE)
             .place(UPDATED_PLACE);
+        // Add required entity
+        Council council;
+        council = CouncilResourceIT.createUpdatedEntity();
+        council.setId("fixed-id-for-tests");
+        meeting.setCouncil(council);
         return meeting;
     }
 
@@ -129,8 +128,6 @@ public class MeetingResourceIT {
         List<Meeting> meetingList = meetingRepository.findAll();
         assertThat(meetingList).hasSize(databaseSizeBeforeCreate + 1);
         Meeting testMeeting = meetingList.get(meetingList.size() - 1);
-        assertThat(testMeeting.getKey()).isEqualTo(DEFAULT_KEY);
-        assertThat(testMeeting.getCouncilKey()).isEqualTo(DEFAULT_COUNCIL_KEY);
         assertThat(testMeeting.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testMeeting.getPlace()).isEqualTo(DEFAULT_PLACE);
     }
@@ -164,8 +161,6 @@ public class MeetingResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(meeting.getId())))
-            .andExpect(jsonPath("$.[*].key").value(hasItem(DEFAULT_KEY.intValue())))
-            .andExpect(jsonPath("$.[*].councilKey").value(hasItem(DEFAULT_COUNCIL_KEY.intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE.toString())));
     }
@@ -180,8 +175,6 @@ public class MeetingResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(meeting.getId()))
-            .andExpect(jsonPath("$.key").value(DEFAULT_KEY.intValue()))
-            .andExpect(jsonPath("$.councilKey").value(DEFAULT_COUNCIL_KEY.intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.place").value(DEFAULT_PLACE.toString()));
     }
@@ -203,8 +196,6 @@ public class MeetingResourceIT {
         // Update the meeting
         Meeting updatedMeeting = meetingRepository.findById(meeting.getId()).get();
         updatedMeeting
-            .key(UPDATED_KEY)
-            .councilKey(UPDATED_COUNCIL_KEY)
             .date(UPDATED_DATE)
             .place(UPDATED_PLACE);
 
@@ -217,8 +208,6 @@ public class MeetingResourceIT {
         List<Meeting> meetingList = meetingRepository.findAll();
         assertThat(meetingList).hasSize(databaseSizeBeforeUpdate);
         Meeting testMeeting = meetingList.get(meetingList.size() - 1);
-        assertThat(testMeeting.getKey()).isEqualTo(UPDATED_KEY);
-        assertThat(testMeeting.getCouncilKey()).isEqualTo(UPDATED_COUNCIL_KEY);
         assertThat(testMeeting.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testMeeting.getPlace()).isEqualTo(UPDATED_PLACE);
     }

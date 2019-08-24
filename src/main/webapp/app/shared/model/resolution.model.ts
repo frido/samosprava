@@ -1,3 +1,5 @@
+import { IPerson } from 'app/shared/model/person.model';
+import { ICouncil } from 'app/shared/model/council.model';
 import { IMeeting } from 'app/shared/model/meeting.model';
 
 export const enum ResolutionType {
@@ -18,34 +20,32 @@ export const enum ResolutionType {
 
 export interface IResolution {
   id?: string;
-  key?: number;
   number?: string;
   type?: ResolutionType;
-  councilKey?: number;
-  creatorKey?: string;
   title?: string;
   description?: string;
   voteFor?: number;
   voteAgainst?: number;
   presented?: number;
   source?: string;
+  creators?: IPerson[];
+  council?: ICouncil;
   meeting?: IMeeting;
 }
 
 export class Resolution implements IResolution {
   constructor(
     public id?: string,
-    public key?: number,
     public number?: string,
     public type?: ResolutionType,
-    public councilKey?: number,
-    public creatorKey?: string,
     public title?: string,
     public description?: string,
     public voteFor?: number,
     public voteAgainst?: number,
     public presented?: number,
     public source?: string,
+    public creators?: IPerson[],
+    public council?: ICouncil,
     public meeting?: IMeeting
   ) {}
 }

@@ -18,20 +18,22 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Key</span></th>
-            <th><span>Council Key</span></th>
             <th><span>Date</span></th>
             <th><span>Place</span></th>
+            <th><span>Council</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let meeting of meetings ;trackBy: trackId">
                 <td><a [routerLink]="['/meeting', meeting.id, 'view' ]">{{meeting.id}}</a></td>
-                <td>{{meeting.key}}</td>
-                <td>{{meeting.councilKey}}</td>
-                <td>{{meeting.date | date:'medium'}}</td>
+                <td>{{meeting.date | date:'mediumDate'}}</td>
                 <td>{{meeting.place}}</td>
+                <td>
+                    <div *ngIf="meeting.council">
+                        <a [routerLink]="['/council', meeting.council?.id, 'view' ]" >{{meeting.council?.name}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

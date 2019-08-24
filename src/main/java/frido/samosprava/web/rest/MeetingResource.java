@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -46,7 +47,7 @@ public class MeetingResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/meetings")
-    public ResponseEntity<Meeting> createMeeting(@RequestBody Meeting meeting) throws URISyntaxException {
+    public ResponseEntity<Meeting> createMeeting(@Valid @RequestBody Meeting meeting) throws URISyntaxException {
         log.debug("REST request to save Meeting : {}", meeting);
         if (meeting.getId() != null) {
             throw new BadRequestAlertException("A new meeting cannot already have an ID", ENTITY_NAME, "idexists");
@@ -67,7 +68,7 @@ public class MeetingResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/meetings")
-    public ResponseEntity<Meeting> updateMeeting(@RequestBody Meeting meeting) throws URISyntaxException {
+    public ResponseEntity<Meeting> updateMeeting(@Valid @RequestBody Meeting meeting) throws URISyntaxException {
         log.debug("REST request to update Meeting : {}", meeting);
         if (meeting.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

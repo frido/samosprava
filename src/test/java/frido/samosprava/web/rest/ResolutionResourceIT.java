@@ -2,14 +2,19 @@ package frido.samosprava.web.rest;
 
 import frido.samosprava.SamospravaApp;
 import frido.samosprava.domain.Resolution;
+import frido.samosprava.domain.Council;
+import frido.samosprava.domain.Meeting;
 import frido.samosprava.repository.ResolutionRepository;
 import frido.samosprava.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -18,11 +23,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static frido.samosprava.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,22 +40,11 @@ import frido.samosprava.domain.enumeration.ResolutionType;
 @SpringBootTest(classes = SamospravaApp.class)
 public class ResolutionResourceIT {
 
-    private static final Long DEFAULT_KEY = 1L;
-    private static final Long UPDATED_KEY = 2L;
-    private static final Long SMALLER_KEY = 1L - 1L;
-
     private static final String DEFAULT_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_NUMBER = "BBBBBBBBBB";
 
     private static final ResolutionType DEFAULT_TYPE = ResolutionType.RENT;
     private static final ResolutionType UPDATED_TYPE = ResolutionType.OTHER;
-
-    private static final Long DEFAULT_COUNCIL_KEY = 1L;
-    private static final Long UPDATED_COUNCIL_KEY = 2L;
-    private static final Long SMALLER_COUNCIL_KEY = 1L - 1L;
-
-    private static final String DEFAULT_CREATOR_KEY = "AAAAAAAAAA";
-    private static final String UPDATED_CREATOR_KEY = "BBBBBBBBBB";
 
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
@@ -73,6 +69,9 @@ public class ResolutionResourceIT {
 
     @Autowired
     private ResolutionRepository resolutionRepository;
+
+    @Mock
+    private ResolutionRepository resolutionRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -110,17 +109,24 @@ public class ResolutionResourceIT {
      */
     public static Resolution createEntity() {
         Resolution resolution = new Resolution()
-            .key(DEFAULT_KEY)
             .number(DEFAULT_NUMBER)
             .type(DEFAULT_TYPE)
-            .councilKey(DEFAULT_COUNCIL_KEY)
-            .creatorKey(DEFAULT_CREATOR_KEY)
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
             .voteFor(DEFAULT_VOTE_FOR)
             .voteAgainst(DEFAULT_VOTE_AGAINST)
             .presented(DEFAULT_PRESENTED)
             .source(DEFAULT_SOURCE);
+        // Add required entity
+        Council council;
+        council = CouncilResourceIT.createEntity();
+        council.setId("fixed-id-for-tests");
+        resolution.setCouncil(council);
+        // Add required entity
+        Meeting meeting;
+        meeting = MeetingResourceIT.createEntity();
+        meeting.setId("fixed-id-for-tests");
+        resolution.setMeeting(meeting);
         return resolution;
     }
     /**
@@ -131,17 +137,24 @@ public class ResolutionResourceIT {
      */
     public static Resolution createUpdatedEntity() {
         Resolution resolution = new Resolution()
-            .key(UPDATED_KEY)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
-            .councilKey(UPDATED_COUNCIL_KEY)
-            .creatorKey(UPDATED_CREATOR_KEY)
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .voteFor(UPDATED_VOTE_FOR)
             .voteAgainst(UPDATED_VOTE_AGAINST)
             .presented(UPDATED_PRESENTED)
             .source(UPDATED_SOURCE);
+        // Add required entity
+        Council council;
+        council = CouncilResourceIT.createUpdatedEntity();
+        council.setId("fixed-id-for-tests");
+        resolution.setCouncil(council);
+        // Add required entity
+        Meeting meeting;
+        meeting = MeetingResourceIT.createUpdatedEntity();
+        meeting.setId("fixed-id-for-tests");
+        resolution.setMeeting(meeting);
         return resolution;
     }
 
@@ -165,11 +178,8 @@ public class ResolutionResourceIT {
         List<Resolution> resolutionList = resolutionRepository.findAll();
         assertThat(resolutionList).hasSize(databaseSizeBeforeCreate + 1);
         Resolution testResolution = resolutionList.get(resolutionList.size() - 1);
-        assertThat(testResolution.getKey()).isEqualTo(DEFAULT_KEY);
         assertThat(testResolution.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testResolution.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testResolution.getCouncilKey()).isEqualTo(DEFAULT_COUNCIL_KEY);
-        assertThat(testResolution.getCreatorKey()).isEqualTo(DEFAULT_CREATOR_KEY);
         assertThat(testResolution.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testResolution.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testResolution.getVoteFor()).isEqualTo(DEFAULT_VOTE_FOR);
@@ -207,11 +217,8 @@ public class ResolutionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(resolution.getId())))
-            .andExpect(jsonPath("$.[*].key").value(hasItem(DEFAULT_KEY.intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].councilKey").value(hasItem(DEFAULT_COUNCIL_KEY.intValue())))
-            .andExpect(jsonPath("$.[*].creatorKey").value(hasItem(DEFAULT_CREATOR_KEY.toString())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].voteFor").value(hasItem(DEFAULT_VOTE_FOR)))
@@ -220,6 +227,39 @@ public class ResolutionResourceIT {
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllResolutionsWithEagerRelationshipsIsEnabled() throws Exception {
+        ResolutionResource resolutionResource = new ResolutionResource(resolutionRepositoryMock);
+        when(resolutionRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restResolutionMockMvc = MockMvcBuilders.standaloneSetup(resolutionResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restResolutionMockMvc.perform(get("/api/resolutions?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(resolutionRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllResolutionsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        ResolutionResource resolutionResource = new ResolutionResource(resolutionRepositoryMock);
+            when(resolutionRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restResolutionMockMvc = MockMvcBuilders.standaloneSetup(resolutionResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restResolutionMockMvc.perform(get("/api/resolutions?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(resolutionRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     public void getResolution() throws Exception {
         // Initialize the database
@@ -230,11 +270,8 @@ public class ResolutionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(resolution.getId()))
-            .andExpect(jsonPath("$.key").value(DEFAULT_KEY.intValue()))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.councilKey").value(DEFAULT_COUNCIL_KEY.intValue()))
-            .andExpect(jsonPath("$.creatorKey").value(DEFAULT_CREATOR_KEY.toString()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.voteFor").value(DEFAULT_VOTE_FOR))
@@ -260,11 +297,8 @@ public class ResolutionResourceIT {
         // Update the resolution
         Resolution updatedResolution = resolutionRepository.findById(resolution.getId()).get();
         updatedResolution
-            .key(UPDATED_KEY)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
-            .councilKey(UPDATED_COUNCIL_KEY)
-            .creatorKey(UPDATED_CREATOR_KEY)
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .voteFor(UPDATED_VOTE_FOR)
@@ -281,11 +315,8 @@ public class ResolutionResourceIT {
         List<Resolution> resolutionList = resolutionRepository.findAll();
         assertThat(resolutionList).hasSize(databaseSizeBeforeUpdate);
         Resolution testResolution = resolutionList.get(resolutionList.size() - 1);
-        assertThat(testResolution.getKey()).isEqualTo(UPDATED_KEY);
         assertThat(testResolution.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testResolution.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testResolution.getCouncilKey()).isEqualTo(UPDATED_COUNCIL_KEY);
-        assertThat(testResolution.getCreatorKey()).isEqualTo(UPDATED_CREATOR_KEY);
         assertThat(testResolution.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testResolution.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testResolution.getVoteFor()).isEqualTo(UPDATED_VOTE_FOR);

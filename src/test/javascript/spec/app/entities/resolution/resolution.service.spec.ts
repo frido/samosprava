@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ResolutionService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Resolution('ID', 0, 'AAAAAAA', ResolutionType.RENT, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 'AAAAAAA');
+      elemDefault = new Resolution('ID', 'AAAAAAA', ResolutionType.RENT, 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -59,11 +59,8 @@ describe('Service Tests', () => {
       it('should update a Resolution', async () => {
         const returnedFromService = Object.assign(
           {
-            key: 1,
             number: 'BBBBBB',
             type: 'BBBBBB',
-            councilKey: 1,
-            creatorKey: 'BBBBBB',
             title: 'BBBBBB',
             description: 'BBBBBB',
             voteFor: 1,
@@ -87,11 +84,8 @@ describe('Service Tests', () => {
       it('should return a list of Resolution', async () => {
         const returnedFromService = Object.assign(
           {
-            key: 1,
             number: 'BBBBBB',
             type: 'BBBBBB',
-            councilKey: 1,
-            creatorKey: 'BBBBBB',
             title: 'BBBBBB',
             description: 'BBBBBB',
             voteFor: 1,

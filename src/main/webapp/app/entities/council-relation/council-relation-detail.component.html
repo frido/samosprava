@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="councilRelation">
+            <h2><span>Council Relation</span> {{councilRelation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>From</span></dt>
+                <dd>
+                    <span>{{councilRelation.from}}</span>
+                </dd>
+                <dt><span>To</span></dt>
+                <dd>
+                    <span>{{councilRelation.to}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{councilRelation.type}}</span>
+                </dd>
+                <dt><span>Council</span></dt>
+                <dd>
+                    <div *ngIf="councilRelation.council">
+                        <a [routerLink]="['/council', councilRelation.council?.id, 'view']">{{councilRelation.council?.name}}</a>
+                    </div>
+                </dd>
+                <dt><span>Person</span></dt>
+                <dd>
+                    <div *ngIf="councilRelation.person">
+                        <a [routerLink]="['/person', councilRelation.person?.id, 'view']">{{councilRelation.person?.name}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/council-relation', councilRelation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

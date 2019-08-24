@@ -4,8 +4,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import frido.samosprava.domain.enumeration.ResolutionType;
 
@@ -20,20 +23,11 @@ public class Resolution implements Serializable {
     @Id
     private String id;
 
-    @Field("key")
-    private Long key;
-
     @Field("number")
     private String number;
 
     @Field("type")
     private ResolutionType type;
-
-    @Field("council_key")
-    private Long councilKey;
-
-    @Field("creator_key")
-    private String creatorKey;
 
     @Field("title")
     private String title;
@@ -54,6 +48,15 @@ public class Resolution implements Serializable {
     private String source;
 
     @DBRef
+    @Field("creators")
+    private Set<Person> creators = new HashSet<>();
+
+    @DBRef
+    @Field("council")
+    @JsonIgnoreProperties("resolutions")
+    private Council council;
+
+    @DBRef
     @Field("meeting")
     @JsonIgnoreProperties("resolutions")
     private Meeting meeting;
@@ -65,19 +68,6 @@ public class Resolution implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getKey() {
-        return key;
-    }
-
-    public Resolution key(Long key) {
-        this.key = key;
-        return this;
-    }
-
-    public void setKey(Long key) {
-        this.key = key;
     }
 
     public String getNumber() {
@@ -104,32 +94,6 @@ public class Resolution implements Serializable {
 
     public void setType(ResolutionType type) {
         this.type = type;
-    }
-
-    public Long getCouncilKey() {
-        return councilKey;
-    }
-
-    public Resolution councilKey(Long councilKey) {
-        this.councilKey = councilKey;
-        return this;
-    }
-
-    public void setCouncilKey(Long councilKey) {
-        this.councilKey = councilKey;
-    }
-
-    public String getCreatorKey() {
-        return creatorKey;
-    }
-
-    public Resolution creatorKey(String creatorKey) {
-        this.creatorKey = creatorKey;
-        return this;
-    }
-
-    public void setCreatorKey(String creatorKey) {
-        this.creatorKey = creatorKey;
     }
 
     public String getTitle() {
@@ -210,6 +174,44 @@ public class Resolution implements Serializable {
         this.source = source;
     }
 
+    public Set<Person> getCreators() {
+        return creators;
+    }
+
+    public Resolution creators(Set<Person> people) {
+        this.creators = people;
+        return this;
+    }
+
+    public Resolution addCreators(Person person) {
+        this.creators.add(person);
+        person.getCreatorsOfs().add(this);
+        return this;
+    }
+
+    public Resolution removeCreators(Person person) {
+        this.creators.remove(person);
+        person.getCreatorsOfs().remove(this);
+        return this;
+    }
+
+    public void setCreators(Set<Person> people) {
+        this.creators = people;
+    }
+
+    public Council getCouncil() {
+        return council;
+    }
+
+    public Resolution council(Council council) {
+        this.council = council;
+        return this;
+    }
+
+    public void setCouncil(Council council) {
+        this.council = council;
+    }
+
     public Meeting getMeeting() {
         return meeting;
     }
@@ -244,11 +246,8 @@ public class Resolution implements Serializable {
     public String toString() {
         return "Resolution{" +
             "id=" + getId() +
-            ", key=" + getKey() +
             ", number='" + getNumber() + "'" +
             ", type='" + getType() + "'" +
-            ", councilKey=" + getCouncilKey() +
-            ", creatorKey='" + getCreatorKey() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
             ", voteFor=" + getVoteFor() +

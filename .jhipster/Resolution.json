@@ -2,10 +2,6 @@
     "name": "Resolution",
     "fields": [
         {
-            "fieldName": "key",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "number",
             "fieldType": "String"
         },
@@ -13,14 +9,6 @@
             "fieldName": "type",
             "fieldType": "ResolutionType",
             "fieldValues": "RENT,OTHER,PETITION,INFO,REQUEST,INSPECTION,PROJECT,BUDGET,REGION,TRANSFER,RESERVATION,VZN,CHOICE"
-        },
-        {
-            "fieldName": "councilKey",
-            "fieldType": "Long"
-        },
-        {
-            "fieldName": "creatorKey",
-            "fieldType": "String"
         },
         {
             "fieldName": "title",
@@ -49,11 +37,28 @@
     ],
     "relationships": [
         {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "creatorsOf",
+            "relationshipName": "creators",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "resolutions",
+            "relationshipValidateRules": "required",
+            "relationshipName": "council",
+            "otherEntityField": "name"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "meeting",
-            "otherEntityRelationshipName": "resolution",
+            "otherEntityRelationshipName": "resolutions",
+            "relationshipValidateRules": "required",
             "relationshipName": "meeting",
-            "otherEntityField": "id"
+            "otherEntityField": "date"
         }
     ],
     "changelogDate": "20190824053050",

@@ -2,16 +2,8 @@
     "name": "Meeting",
     "fields": [
         {
-            "fieldName": "key",
-            "fieldType": "Long"
-        },
-        {
-            "fieldName": "councilKey",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "date",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "place",
@@ -23,7 +15,15 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "resolution",
             "otherEntityRelationshipName": "meeting",
-            "relationshipName": "resolution"
+            "relationshipName": "resolutions"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "meetings",
+            "relationshipValidateRules": "required",
+            "relationshipName": "council",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20190824041444",

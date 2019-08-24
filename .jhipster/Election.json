@@ -1,0 +1,43 @@
+{
+    "name": "Election",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "ElectionType",
+            "fieldValues": "DEPUTY,MAYOR"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vote",
+            "otherEntityRelationshipName": "election",
+            "relationshipName": "votes"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "elections",
+            "relationshipValidateRules": "required",
+            "relationshipName": "council",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190824193955",
+    "entityTableName": "election",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

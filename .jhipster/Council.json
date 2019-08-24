@@ -1,0 +1,86 @@
+{
+    "name": "Council",
+    "fields": [
+        {
+            "fieldName": "key",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deputyTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mayorTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "officeTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fbTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fbLink",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "deputyRelation",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "deputyRels"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "election",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "elections"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "resolutions"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "councilRelation",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "councilRels"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "meeting",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "meetings"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commission",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "commissions"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "department",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "departments"
+        }
+    ],
+    "changelogDate": "20190824193948",
+    "entityTableName": "council",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

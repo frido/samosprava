@@ -1,11 +1,13 @@
 package frido.samosprava.domain;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,21 +22,20 @@ public class Meeting implements Serializable {
     @Id
     private String id;
 
-    @Field("key")
-    private Long key;
-
-    @Field("council_key")
-    private Long councilKey;
-
     @Field("date")
-    private Instant date;
+    private LocalDate date;
 
     @Field("place")
     private String place;
 
     @DBRef
-    @Field("resolution")
+    @Field("resolutions")
     private Set<Resolution> resolutions = new HashSet<>();
+
+    @DBRef
+    @Field("council")
+    @JsonIgnoreProperties("meetings")
+    private Council council;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -45,42 +46,16 @@ public class Meeting implements Serializable {
         this.id = id;
     }
 
-    public Long getKey() {
-        return key;
-    }
-
-    public Meeting key(Long key) {
-        this.key = key;
-        return this;
-    }
-
-    public void setKey(Long key) {
-        this.key = key;
-    }
-
-    public Long getCouncilKey() {
-        return councilKey;
-    }
-
-    public Meeting councilKey(Long councilKey) {
-        this.councilKey = councilKey;
-        return this;
-    }
-
-    public void setCouncilKey(Long councilKey) {
-        this.councilKey = councilKey;
-    }
-
-    public Instant getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public Meeting date(Instant date) {
+    public Meeting date(LocalDate date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -106,13 +81,13 @@ public class Meeting implements Serializable {
         return this;
     }
 
-    public Meeting addResolution(Resolution resolution) {
+    public Meeting addResolutions(Resolution resolution) {
         this.resolutions.add(resolution);
         resolution.setMeeting(this);
         return this;
     }
 
-    public Meeting removeResolution(Resolution resolution) {
+    public Meeting removeResolutions(Resolution resolution) {
         this.resolutions.remove(resolution);
         resolution.setMeeting(null);
         return this;
@@ -120,6 +95,19 @@ public class Meeting implements Serializable {
 
     public void setResolutions(Set<Resolution> resolutions) {
         this.resolutions = resolutions;
+    }
+
+    public Council getCouncil() {
+        return council;
+    }
+
+    public Meeting council(Council council) {
+        this.council = council;
+        return this;
+    }
+
+    public void setCouncil(Council council) {
+        this.council = council;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -143,8 +131,6 @@ public class Meeting implements Serializable {
     public String toString() {
         return "Meeting{" +
             "id=" + getId() +
-            ", key=" + getKey() +
-            ", councilKey=" + getCouncilKey() +
             ", date='" + getDate() + "'" +
             ", place='" + getPlace() + "'" +
             "}";

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -46,7 +47,7 @@ public class ResolutionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/resolutions")
-    public ResponseEntity<Resolution> createResolution(@RequestBody Resolution resolution) throws URISyntaxException {
+    public ResponseEntity<Resolution> createResolution(@Valid @RequestBody Resolution resolution) throws URISyntaxException {
         log.debug("REST request to save Resolution : {}", resolution);
         if (resolution.getId() != null) {
             throw new BadRequestAlertException("A new resolution cannot already have an ID", ENTITY_NAME, "idexists");
@@ -67,7 +68,7 @@ public class ResolutionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/resolutions")
-    public ResponseEntity<Resolution> updateResolution(@RequestBody Resolution resolution) throws URISyntaxException {
+    public ResponseEntity<Resolution> updateResolution(@Valid @RequestBody Resolution resolution) throws URISyntaxException {
         log.debug("REST request to update Resolution : {}", resolution);
         if (resolution.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -81,13 +82,13 @@ public class ResolutionResource {
     /**
      * {@code GET  /resolutions} : get all the resolutions.
      *
-
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of resolutions in body.
      */
     @GetMapping("/resolutions")
-    public List<Resolution> getAllResolutions() {
+    public List<Resolution> getAllResolutions(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Resolutions");
-        return resolutionRepository.findAll();
+        return resolutionRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -99,7 +100,7 @@ public class ResolutionResource {
     @GetMapping("/resolutions/{id}")
     public ResponseEntity<Resolution> getResolution(@PathVariable String id) {
         log.debug("REST request to get Resolution : {}", id);
-        Optional<Resolution> resolution = resolutionRepository.findById(id);
+        Optional<Resolution> resolution = resolutionRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(resolution);
     }
 

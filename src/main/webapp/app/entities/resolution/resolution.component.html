@@ -18,17 +18,16 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Key</span></th>
             <th><span>Number</span></th>
             <th><span>Type</span></th>
-            <th><span>Council Key</span></th>
-            <th><span>Creator Key</span></th>
             <th><span>Title</span></th>
             <th><span>Description</span></th>
             <th><span>Vote For</span></th>
             <th><span>Vote Against</span></th>
             <th><span>Presented</span></th>
             <th><span>Source</span></th>
+            <th><span>Creators</span></th>
+            <th><span>Council</span></th>
             <th><span>Meeting</span></th>
             <th></th>
             </tr>
@@ -36,11 +35,8 @@
             <tbody>
             <tr *ngFor="let resolution of resolutions ;trackBy: trackId">
                 <td><a [routerLink]="['/resolution', resolution.id, 'view' ]">{{resolution.id}}</a></td>
-                <td>{{resolution.key}}</td>
                 <td>{{resolution.number}}</td>
                 <td>{{resolution.type}}</td>
-                <td>{{resolution.councilKey}}</td>
-                <td>{{resolution.creatorKey}}</td>
                 <td>{{resolution.title}}</td>
                 <td>{{resolution.description}}</td>
                 <td>{{resolution.voteFor}}</td>
@@ -48,8 +44,18 @@
                 <td>{{resolution.presented}}</td>
                 <td>{{resolution.source}}</td>
                 <td>
+                    <span *ngFor="let creators of resolution.creators; let last = last">
+                            <a class="form-control-static" [routerLink]="['/person', creators?.id, 'view' ]">{{creators.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <div *ngIf="resolution.council">
+                        <a [routerLink]="['/council', resolution.council?.id, 'view' ]" >{{resolution.council?.name}}</a>
+                    </div>
+                </td>
+                <td>
                     <div *ngIf="resolution.meeting">
-                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view' ]" >{{resolution.meeting?.id}}</a>
+                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view' ]" >{{resolution.meeting?.date}}</a>
                     </div>
                 </td>
                 <td class="text-right">

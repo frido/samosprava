@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-council-heading">Create or edit a Council</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_key">Key</label>
+                    <input type="text" class="form-control" name="key" id="field_key"
+                           formControlName="key"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_deputyTitle">Deputy Title</label>
+                    <input type="text" class="form-control" name="deputyTitle" id="field_deputyTitle"
+                           formControlName="deputyTitle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_mayorTitle">Mayor Title</label>
+                    <input type="text" class="form-control" name="mayorTitle" id="field_mayorTitle"
+                           formControlName="mayorTitle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_officeTitle">Office Title</label>
+                    <input type="text" class="form-control" name="officeTitle" id="field_officeTitle"
+                           formControlName="officeTitle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fbTitle">Fb Title</label>
+                    <input type="text" class="form-control" name="fbTitle" id="field_fbTitle"
+                           formControlName="fbTitle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fbLink">Fb Link</label>
+                    <input type="text" class="form-control" name="fbLink" id="field_fbLink"
+                           formControlName="fbLink"/>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

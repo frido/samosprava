@@ -41,6 +41,7 @@ entity CommissionRelation {
 }
 
 entity Election{
+    name String
 	date LocalDate
     type ElectionType
 }
@@ -49,35 +50,6 @@ entity Vote {
 	party String
     votes Integer
 }
-
-relationship OneToMany {
-  Person{deputy} to DeputyRelation{person}
-}
-
-relationship OneToMany {
-  Council{deputy} to DeputyRelation{council}
-}
-
-relationship OneToOne {
-  DeputyRelation{vote} to Vote{Deputy}
-}
-
-relationship OneToMany {
-  Election{vote} to Vote{election}
-}
-
-relationship OneToMany {
-	Person{vote} to Vote{person}
-}
-
-relationship OneToMany {
-	Council{vote} to Vote{council}
-}
-
-relationship OneToMany {
-	Council{election} to Election{council}
-}
-
 
 entity Person {
 	name String
@@ -129,40 +101,64 @@ enum ElectionType {
 }
 
 relationship OneToMany {
-  Council{resolution} to Resolution{council}
+  Person{deputyRels} to DeputyRelation{person(name) required}
+}
+
+relationship OneToMany {
+  Council{deputyRels} to DeputyRelation{council(name) required}
+}
+
+relationship OneToOne {
+  DeputyRelation{vote(votes) required} to Vote{deputy}
+}
+
+relationship OneToMany {
+  Election{votes} to Vote{election(name) required}
+}
+
+relationship OneToMany {
+	Person{votes} to Vote{person(name) required}
+}
+
+relationship OneToMany {
+	Council{elections} to Election{council(name) required}
+}
+
+relationship OneToMany {
+  Council{resolutions} to Resolution{council(name) required}
 }
 
 relationship ManyToMany {
-  Resolution{creator} to Person{resolution}
+  Resolution{creators} to Person{creatorsOf}
 }
 
 relationship OneToMany {
-  Council{councilRel} to CouncilRelation{council}
-  Person{councilRel} to CouncilRelation{person}
+  Council{councilRels} to CouncilRelation{council(name) required}
+  Person{councilRels} to CouncilRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Department{departmentRel} to DepartmentRelation{department}
-  Person{departmentRel} to DepartmentRelation{department}
+  Department{departmentRels} to DepartmentRelation{department(name) required}
+  Person{departmentRels} to DepartmentRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Commission{councilRel} to CommissionRelation{commission}
-  Person{councilRel} to CommissionRelation{person}
+  Commission{commissionRels} to CommissionRelation{commission(name) required}
+  Person{commissionRels} to CommissionRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Meeting{resolution} to Resolution{meeting}
+  Meeting{resolutions} to Resolution{meeting(date) required}
 }
 
 relationship OneToMany {
-  Council{meeting} to Meeting{council}
+  Council{meetings} to Meeting{council(name) required}
 }
 
 relationship OneToMany {
-  Council{commission} to Commission{council}
+  Council{commissions} to Commission{council(name) required}
 }
 
 relationship OneToMany {
-  Council{department} to Department{council}
+  Council{departments} to Department{council(name) required}
 }

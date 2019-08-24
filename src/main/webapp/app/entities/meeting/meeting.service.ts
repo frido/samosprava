@@ -51,7 +51,7 @@ export class MeetingService {
 
   protected convertDateFromClient(meeting: IMeeting): IMeeting {
     const copy: IMeeting = Object.assign({}, meeting, {
-      date: meeting.date != null && meeting.date.isValid() ? meeting.date.toJSON() : null
+      date: meeting.date != null && meeting.date.isValid() ? meeting.date.format(DATE_FORMAT) : null
     });
     return copy;
   }

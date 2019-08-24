@@ -7,6 +7,10 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IResolution, Resolution } from 'app/shared/model/resolution.model';
 import { ResolutionService } from './resolution.service';
+import { IPerson } from 'app/shared/model/person.model';
+import { PersonService } from 'app/entities/person';
+import { ICouncil } from 'app/shared/model/council.model';
+import { CouncilService } from 'app/entities/council';
 import { IMeeting } from 'app/shared/model/meeting.model';
 import { MeetingService } from 'app/entities/meeting';
 
@@ -17,27 +21,32 @@ import { MeetingService } from 'app/entities/meeting';
 export class ResolutionUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  people: IPerson[];
+
+  councils: ICouncil[];
+
   meetings: IMeeting[];
 
   editForm = this.fb.group({
     id: [],
-    key: [],
     number: [],
     type: [],
-    councilKey: [],
-    creatorKey: [],
     title: [],
     description: [],
     voteFor: [],
     voteAgainst: [],
     presented: [],
     source: [],
-    meeting: []
+    creators: [],
+    council: [null, Validators.required],
+    meeting: [null, Validators.required]
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected resolutionService: ResolutionService,
+    protected personService: PersonService,
+    protected councilService: CouncilService,
     protected meetingService: MeetingService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -48,6 +57,20 @@ export class ResolutionUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ resolution }) => {
       this.updateForm(resolution);
     });
+    this.personService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IPerson[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IPerson[]>) => response.body)
+      )
+      .subscribe((res: IPerson[]) => (this.people = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.councilService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ICouncil[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ICouncil[]>) => response.body)
+      )
+      .subscribe((res: ICouncil[]) => (this.councils = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.meetingService
       .query()
       .pipe(
@@ -60,17 +83,16 @@ export class ResolutionUpdateComponent implements OnInit {
   updateForm(resolution: IResolution) {
     this.editForm.patchValue({
       id: resolution.id,
-      key: resolution.key,
       number: resolution.number,
       type: resolution.type,
-      councilKey: resolution.councilKey,
-      creatorKey: resolution.creatorKey,
       title: resolution.title,
       description: resolution.description,
       voteFor: resolution.voteFor,
       voteAgainst: resolution.voteAgainst,
       presented: resolution.presented,
       source: resolution.source,
+      creators: resolution.creators,
+      council: resolution.council,
       meeting: resolution.meeting
     });
   }
@@ -93,17 +115,16 @@ export class ResolutionUpdateComponent implements OnInit {
     return {
       ...new Resolution(),
       id: this.editForm.get(['id']).value,
-      key: this.editForm.get(['key']).value,
       number: this.editForm.get(['number']).value,
       type: this.editForm.get(['type']).value,
-      councilKey: this.editForm.get(['councilKey']).value,
-      creatorKey: this.editForm.get(['creatorKey']).value,
       title: this.editForm.get(['title']).value,
       description: this.editForm.get(['description']).value,
       voteFor: this.editForm.get(['voteFor']).value,
       voteAgainst: this.editForm.get(['voteAgainst']).value,
       presented: this.editForm.get(['presented']).value,
       source: this.editForm.get(['source']).value,
+      creators: this.editForm.get(['creators']).value,
+      council: this.editForm.get(['council']).value,
       meeting: this.editForm.get(['meeting']).value
     };
   }
@@ -124,7 +145,26 @@ export class ResolutionUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
+  trackPersonById(index: number, item: IPerson) {
+    return item.id;
+  }
+
+  trackCouncilById(index: number, item: ICouncil) {
+    return item.id;
+  }
+
   trackMeetingById(index: number, item: IMeeting) {
     return item.id;
+  }
+
+  getSelected(selectedVals: Array<any>, option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

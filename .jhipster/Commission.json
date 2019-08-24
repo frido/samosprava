@@ -1,0 +1,38 @@
+{
+    "name": "Commission",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "commissionRelation",
+            "otherEntityRelationshipName": "commission",
+            "relationshipName": "commissionRels"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "commissions",
+            "relationshipValidateRules": "required",
+            "relationshipName": "council",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190824193949",
+    "entityTableName": "commission",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
