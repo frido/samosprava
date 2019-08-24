@@ -1,16 +1,100 @@
+entity Council {
+	key String
+    name String
+    deputyTitle String
+    mayorTitle String
+    officeTitle String
+    fbTitle String
+    fbLink String
+}
+
+entity Commission {
+	name String
+    desc String
+}
+
+entity Department {
+	name String
+}
+
+entity DeputyRelation {
+	from LocalDate
+    to LocalDate
+}
+
+entity CouncilRelation {
+	from LocalDate
+    to LocalDate
+	type CouncilRelationType
+}
+
+entity DepartmentRelation {
+	from LocalDate
+    to LocalDate
+	type DepartmentRelationType
+}
+
+entity CommissionRelation {
+	from LocalDate
+    to LocalDate
+	type CommissionRelationType
+}
+
+entity Election{
+	date LocalDate
+    type ElectionType
+}
+
+entity Vote {
+	party String
+    votes Integer
+}
+
+relationship OneToMany {
+  Person{deputy} to DeputyRelation{person}
+}
+
+relationship OneToMany {
+  Council{deputy} to DeputyRelation{council}
+}
+
+relationship OneToOne {
+  DeputyRelation{vote} to Vote{Deputy}
+}
+
+relationship OneToMany {
+  Election{vote} to Vote{election}
+}
+
+relationship OneToMany {
+	Person{vote} to Vote{person}
+}
+
+relationship OneToMany {
+	Council{vote} to Vote{council}
+}
+
+relationship OneToMany {
+	Council{election} to Election{council}
+}
+
+
+entity Person {
+	name String
+    prefix String
+    suffix String
+    club String
+    facebook String
+}
+
 entity Meeting {
-	key Long
-	councilKey Long
-    date Instant
+    date LocalDate
     place String
 }
 
 entity Resolution {
-	key Long
     number String
     type ResolutionType
-    councilKey Long
-    creatorKey String
     title String
     description String
     voteFor Integer
@@ -28,6 +112,57 @@ enum ResolutionType {
 	RENT, OTHER, PETITION, INFO, REQUEST, INSPECTION, PROJECT, BUDGET, REGION, TRANSFER, RESERVATION, VZN, CHOICE
 }
 
+enum CouncilRelationType {
+	CHAIRMAN, VICE_CHAIRMAN, Vice1, Vice2, Prednosta, Kontrolor
+}
+
+enum CommissionRelationType {
+	HEAD, MEMBER
+}
+
+enum DepartmentRelationType {
+	SCHOOL_MEMBER, DIRECTOR, OFFICIAL, HEAD_OFFICIAL, SUPERVISOR, VICE_SUPERVISOR, HEAD_SUPERVISOR
+}
+
+enum ElectionType {
+	DEPUTY, MAYOR
+}
+
+relationship OneToMany {
+  Council{resolution} to Resolution{council}
+}
+
+relationship ManyToMany {
+  Resolution{creator} to Person{resolution}
+}
+
+relationship OneToMany {
+  Council{councilRel} to CouncilRelation{council}
+  Person{councilRel} to CouncilRelation{person}
+}
+
+relationship OneToMany {
+  Department{departmentRel} to DepartmentRelation{department}
+  Person{departmentRel} to DepartmentRelation{department}
+}
+
+relationship OneToMany {
+  Commission{councilRel} to CommissionRelation{commission}
+  Person{councilRel} to CommissionRelation{person}
+}
+
 relationship OneToMany {
   Meeting{resolution} to Resolution{meeting}
+}
+
+relationship OneToMany {
+  Council{meeting} to Meeting{council}
+}
+
+relationship OneToMany {
+  Council{commission} to Commission{council}
+}
+
+relationship OneToMany {
+  Council{department} to Department{council}
 }
