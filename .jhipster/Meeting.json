@@ -1,0 +1,31 @@
+{
+    "name": "Meeting",
+    "fields": [
+        {
+            "fieldName": "key",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "councilKey",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "place",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190824041444",
+    "entityTableName": "meeting",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

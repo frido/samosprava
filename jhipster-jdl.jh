@@ -1,0 +1,6 @@
+entity Meeting {
+	key Long
+	councilKey Long
+    date LocalDate
+    place String
+}

@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="meeting">
+            <h2><span>Meeting</span> {{meeting.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Key</span></dt>
+                <dd>
+                    <span>{{meeting.key}}</span>
+                </dd>
+                <dt><span>Council Key</span></dt>
+                <dd>
+                    <span>{{meeting.councilKey}}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{meeting.date}}</span>
+                </dd>
+                <dt><span>Place</span></dt>
+                <dd>
+                    <span>{{meeting.place}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/meeting', meeting.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -15,8 +15,8 @@
 
 logging:
   level:
-    ROOT: DEBUG
-    io.github.jhipster: DEBUG
+    ROOT: INFO
+    io.github.jhipster: INFO
     frido.samosprava: DEBUG
 
 spring:
@@ -36,8 +36,8 @@ spring:
       indent-output: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017
-      database: samosprava
+      uri: mongodb://frido:frido@ds041643.mlab.com:41643/frido
+      database: frido
   mail:
     host: localhost
     port: 25
