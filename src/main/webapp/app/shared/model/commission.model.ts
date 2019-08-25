@@ -5,7 +5,7 @@ export interface ICommission {
   id?: string;
   name?: string;
   desc?: string;
-  commissionRels?: ICommissionRelation[];
+  commissionRelations?: ICommissionRelation[];
   council?: ICouncil;
 }
 
@@ -14,7 +14,7 @@ export class Commission implements ICommission {
     public id?: string,
     public name?: string,
     public desc?: string,
-    public commissionRels?: ICommissionRelation[],
+    public commissionRelations?: ICommissionRelation[],
     public council?: ICouncil
   ) {}
 }

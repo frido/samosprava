@@ -15,12 +15,12 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "commissionRelation",
             "otherEntityRelationshipName": "commission",
-            "relationshipName": "commissionRels"
+            "relationshipName": "commissionRelation"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "commissions",
+            "otherEntityRelationshipName": "commission",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"

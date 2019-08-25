@@ -23,7 +23,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "person",
-            "otherEntityRelationshipName": "deputyRels",
+            "otherEntityRelationshipName": "deputyRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "person",
             "otherEntityField": "name"
@@ -31,7 +31,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "deputyRels",
+            "otherEntityRelationshipName": "deputyRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"

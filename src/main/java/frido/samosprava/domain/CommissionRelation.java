@@ -33,12 +33,12 @@ public class CommissionRelation implements Serializable {
 
     @DBRef
     @Field("commission")
-    @JsonIgnoreProperties("commissionRels")
+    @JsonIgnoreProperties("commissionRelations")
     private Commission commission;
 
     @DBRef
     @Field("person")
-    @JsonIgnoreProperties("commissionRels")
+    @JsonIgnoreProperties("commissionRelations")
     private Person person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

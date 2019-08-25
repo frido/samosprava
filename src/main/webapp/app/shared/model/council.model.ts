@@ -15,10 +15,10 @@ export interface ICouncil {
   officeTitle?: string;
   fbTitle?: string;
   fbLink?: string;
-  deputyRels?: IDeputyRelation[];
+  deputyRelations?: IDeputyRelation[];
   elections?: IElection[];
   resolutions?: IResolution[];
-  councilRels?: ICouncilRelation[];
+  councilRelations?: ICouncilRelation[];
   meetings?: IMeeting[];
   commissions?: ICommission[];
   departments?: IDepartment[];
@@ -34,10 +34,10 @@ export class Council implements ICouncil {
     public officeTitle?: string,
     public fbTitle?: string,
     public fbLink?: string,
-    public deputyRels?: IDeputyRelation[],
+    public deputyRelations?: IDeputyRelation[],
     public elections?: IElection[],
     public resolutions?: IResolution[],
-    public councilRels?: ICouncilRelation[],
+    public councilRelations?: ICouncilRelation[],
     public meetings?: IMeeting[],
     public commissions?: ICommission[],
     public departments?: IDepartment[]

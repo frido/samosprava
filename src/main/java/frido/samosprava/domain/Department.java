@@ -25,8 +25,8 @@ public class Department implements Serializable {
     private String name;
 
     @DBRef
-    @Field("departmentRels")
-    private Set<DepartmentRelation> departmentRels = new HashSet<>();
+    @Field("departmentRelation")
+    private Set<DepartmentRelation> departmentRelations = new HashSet<>();
 
     @DBRef
     @Field("council")
@@ -55,29 +55,29 @@ public class Department implements Serializable {
         this.name = name;
     }
 
-    public Set<DepartmentRelation> getDepartmentRels() {
-        return departmentRels;
+    public Set<DepartmentRelation> getDepartmentRelations() {
+        return departmentRelations;
     }
 
-    public Department departmentRels(Set<DepartmentRelation> departmentRelations) {
-        this.departmentRels = departmentRelations;
+    public Department departmentRelations(Set<DepartmentRelation> departmentRelations) {
+        this.departmentRelations = departmentRelations;
         return this;
     }
 
-    public Department addDepartmentRels(DepartmentRelation departmentRelation) {
-        this.departmentRels.add(departmentRelation);
+    public Department addDepartmentRelation(DepartmentRelation departmentRelation) {
+        this.departmentRelations.add(departmentRelation);
         departmentRelation.setDepartment(this);
         return this;
     }
 
-    public Department removeDepartmentRels(DepartmentRelation departmentRelation) {
-        this.departmentRels.remove(departmentRelation);
+    public Department removeDepartmentRelation(DepartmentRelation departmentRelation) {
+        this.departmentRelations.remove(departmentRelation);
         departmentRelation.setDepartment(null);
         return this;
     }
 
-    public void setDepartmentRels(Set<DepartmentRelation> departmentRelations) {
-        this.departmentRels = departmentRelations;
+    public void setDepartmentRelations(Set<DepartmentRelation> departmentRelations) {
+        this.departmentRelations = departmentRelations;
     }
 
     public Council getCouncil() {

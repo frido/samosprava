@@ -11,12 +11,12 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "departmentRelation",
             "otherEntityRelationshipName": "department",
-            "relationshipName": "departmentRels"
+            "relationshipName": "departmentRelation"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "departments",
+            "otherEntityRelationshipName": "department",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"

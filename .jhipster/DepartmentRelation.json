@@ -19,7 +19,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "department",
-            "otherEntityRelationshipName": "departmentRels",
+            "otherEntityRelationshipName": "departmentRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "department",
             "otherEntityField": "name"
@@ -27,7 +27,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "person",
-            "otherEntityRelationshipName": "departmentRels",
+            "otherEntityRelationshipName": "departmentRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "person",
             "otherEntityField": "name"

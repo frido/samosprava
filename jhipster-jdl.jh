@@ -101,11 +101,11 @@ enum ElectionType {
 }
 
 relationship OneToMany {
-  Person{deputyRels} to DeputyRelation{person(name) required}
+  Person to DeputyRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Council{deputyRels} to DeputyRelation{council(name) required}
+  Council to DeputyRelation{council(name) required}
 }
 
 relationship OneToOne {
@@ -113,19 +113,19 @@ relationship OneToOne {
 }
 
 relationship OneToMany {
-  Election{votes} to Vote{election(name) required}
+  Election to Vote{election(name) required}
 }
 
 relationship OneToMany {
-	Person{votes} to Vote{person(name) required}
+	Person to Vote{person(name) required}
 }
 
 relationship OneToMany {
-	Council{elections} to Election{council(name) required}
+	Council to Election{council(name) required}
 }
 
 relationship OneToMany {
-  Council{resolutions} to Resolution{council(name) required}
+  Council to Resolution{council(name) required}
 }
 
 relationship ManyToMany {
@@ -133,32 +133,32 @@ relationship ManyToMany {
 }
 
 relationship OneToMany {
-  Council{councilRels} to CouncilRelation{council(name) required}
-  Person{councilRels} to CouncilRelation{person(name) required}
+  Council to CouncilRelation{council(name) required}
+  Person to CouncilRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Department{departmentRels} to DepartmentRelation{department(name) required}
-  Person{departmentRels} to DepartmentRelation{person(name) required}
+  Department to DepartmentRelation{department(name) required}
+  Person to DepartmentRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Commission{commissionRels} to CommissionRelation{commission(name) required}
-  Person{commissionRels} to CommissionRelation{person(name) required}
+  Commission to CommissionRelation{commission(name) required}
+  Person to CommissionRelation{person(name) required}
 }
 
 relationship OneToMany {
-  Meeting{resolutions} to Resolution{meeting(date) required}
+  Meeting to Resolution{meeting(date) required}
 }
 
 relationship OneToMany {
-  Council{meetings} to Meeting{council(name) required}
+  Council to Meeting{council(name) required}
 }
 
 relationship OneToMany {
-  Council{commissions} to Commission{council(name) required}
+  Council to Commission{council(name) required}
 }
 
 relationship OneToMany {
-  Council{departments} to Department{council(name) required}
+  Council to Department{council(name) required}
 }

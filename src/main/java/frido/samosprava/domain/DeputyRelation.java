@@ -32,12 +32,12 @@ public class DeputyRelation implements Serializable {
 
     @DBRef
     @Field("person")
-    @JsonIgnoreProperties("deputyRels")
+    @JsonIgnoreProperties("deputyRelations")
     private Person person;
 
     @DBRef
     @Field("council")
-    @JsonIgnoreProperties("deputyRels")
+    @JsonIgnoreProperties("deputyRelations")
     private Council council;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

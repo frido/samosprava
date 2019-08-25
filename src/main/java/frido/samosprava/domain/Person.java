@@ -1,13 +1,14 @@
 package frido.samosprava.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Person.
@@ -36,24 +37,28 @@ public class Person implements Serializable {
     private String facebook;
 
     @DBRef
-    @Field("deputyRels")
-    private Set<DeputyRelation> deputyRels = new HashSet<>();
+    @Field("deputyRelation")
+    @JsonIgnore
+    private Set<DeputyRelation> deputyRelations = new HashSet<>();
 
     @DBRef
-    @Field("votes")
+    @Field("vote")
     private Set<Vote> votes = new HashSet<>();
 
     @DBRef
-    @Field("councilRels")
-    private Set<CouncilRelation> councilRels = new HashSet<>();
+    @Field("councilRelation")
+    @JsonIgnore
+    private Set<CouncilRelation> councilRelations = new HashSet<>();
 
     @DBRef
-    @Field("departmentRels")
-    private Set<DepartmentRelation> departmentRels = new HashSet<>();
+    @Field("departmentRelation")
+    @JsonIgnore
+    private Set<DepartmentRelation> departmentRelations = new HashSet<>();
 
     @DBRef
-    @Field("commissionRels")
-    private Set<CommissionRelation> commissionRels = new HashSet<>();
+    @Field("commissionRelation")
+    @JsonIgnore
+    private Set<CommissionRelation> commissionRelations = new HashSet<>();
 
     @DBRef
     @Field("creatorsOfs")
@@ -134,29 +139,29 @@ public class Person implements Serializable {
         this.facebook = facebook;
     }
 
-    public Set<DeputyRelation> getDeputyRels() {
-        return deputyRels;
+    public Set<DeputyRelation> getDeputyRelations() {
+        return deputyRelations;
     }
 
-    public Person deputyRels(Set<DeputyRelation> deputyRelations) {
-        this.deputyRels = deputyRelations;
+    public Person deputyRelations(Set<DeputyRelation> deputyRelations) {
+        this.deputyRelations = deputyRelations;
         return this;
     }
 
-    public Person addDeputyRels(DeputyRelation deputyRelation) {
-        this.deputyRels.add(deputyRelation);
+    public Person addDeputyRelation(DeputyRelation deputyRelation) {
+        this.deputyRelations.add(deputyRelation);
         deputyRelation.setPerson(this);
         return this;
     }
 
-    public Person removeDeputyRels(DeputyRelation deputyRelation) {
-        this.deputyRels.remove(deputyRelation);
+    public Person removeDeputyRelation(DeputyRelation deputyRelation) {
+        this.deputyRelations.remove(deputyRelation);
         deputyRelation.setPerson(null);
         return this;
     }
 
-    public void setDeputyRels(Set<DeputyRelation> deputyRelations) {
-        this.deputyRels = deputyRelations;
+    public void setDeputyRelations(Set<DeputyRelation> deputyRelations) {
+        this.deputyRelations = deputyRelations;
     }
 
     public Set<Vote> getVotes() {
@@ -168,13 +173,13 @@ public class Person implements Serializable {
         return this;
     }
 
-    public Person addVotes(Vote vote) {
+    public Person addVote(Vote vote) {
         this.votes.add(vote);
         vote.setPerson(this);
         return this;
     }
 
-    public Person removeVotes(Vote vote) {
+    public Person removeVote(Vote vote) {
         this.votes.remove(vote);
         vote.setPerson(null);
         return this;
@@ -184,79 +189,79 @@ public class Person implements Serializable {
         this.votes = votes;
     }
 
-    public Set<CouncilRelation> getCouncilRels() {
-        return councilRels;
+    public Set<CouncilRelation> getCouncilRelations() {
+        return councilRelations;
     }
 
-    public Person councilRels(Set<CouncilRelation> councilRelations) {
-        this.councilRels = councilRelations;
+    public Person councilRelations(Set<CouncilRelation> councilRelations) {
+        this.councilRelations = councilRelations;
         return this;
     }
 
-    public Person addCouncilRels(CouncilRelation councilRelation) {
-        this.councilRels.add(councilRelation);
+    public Person addCouncilRelation(CouncilRelation councilRelation) {
+        this.councilRelations.add(councilRelation);
         councilRelation.setPerson(this);
         return this;
     }
 
-    public Person removeCouncilRels(CouncilRelation councilRelation) {
-        this.councilRels.remove(councilRelation);
+    public Person removeCouncilRelation(CouncilRelation councilRelation) {
+        this.councilRelations.remove(councilRelation);
         councilRelation.setPerson(null);
         return this;
     }
 
-    public void setCouncilRels(Set<CouncilRelation> councilRelations) {
-        this.councilRels = councilRelations;
+    public void setCouncilRelations(Set<CouncilRelation> councilRelations) {
+        this.councilRelations = councilRelations;
     }
 
-    public Set<DepartmentRelation> getDepartmentRels() {
-        return departmentRels;
+    public Set<DepartmentRelation> getDepartmentRelations() {
+        return departmentRelations;
     }
 
-    public Person departmentRels(Set<DepartmentRelation> departmentRelations) {
-        this.departmentRels = departmentRelations;
+    public Person departmentRelations(Set<DepartmentRelation> departmentRelations) {
+        this.departmentRelations = departmentRelations;
         return this;
     }
 
-    public Person addDepartmentRels(DepartmentRelation departmentRelation) {
-        this.departmentRels.add(departmentRelation);
+    public Person addDepartmentRelation(DepartmentRelation departmentRelation) {
+        this.departmentRelations.add(departmentRelation);
         departmentRelation.setPerson(this);
         return this;
     }
 
-    public Person removeDepartmentRels(DepartmentRelation departmentRelation) {
-        this.departmentRels.remove(departmentRelation);
+    public Person removeDepartmentRelation(DepartmentRelation departmentRelation) {
+        this.departmentRelations.remove(departmentRelation);
         departmentRelation.setPerson(null);
         return this;
     }
 
-    public void setDepartmentRels(Set<DepartmentRelation> departmentRelations) {
-        this.departmentRels = departmentRelations;
+    public void setDepartmentRelations(Set<DepartmentRelation> departmentRelations) {
+        this.departmentRelations = departmentRelations;
     }
 
-    public Set<CommissionRelation> getCommissionRels() {
-        return commissionRels;
+    public Set<CommissionRelation> getCommissionRelations() {
+        return commissionRelations;
     }
 
-    public Person commissionRels(Set<CommissionRelation> commissionRelations) {
-        this.commissionRels = commissionRelations;
+    public Person commissionRelations(Set<CommissionRelation> commissionRelations) {
+        this.commissionRelations = commissionRelations;
         return this;
     }
 
-    public Person addCommissionRels(CommissionRelation commissionRelation) {
-        this.commissionRels.add(commissionRelation);
+    public Person addCommissionRelation(CommissionRelation commissionRelation) {
+        this.commissionRelations.add(commissionRelation);
         commissionRelation.setPerson(this);
         return this;
     }
 
-    public Person removeCommissionRels(CommissionRelation commissionRelation) {
-        this.commissionRels.remove(commissionRelation);
+    public Person removeCommissionRelation(CommissionRelation commissionRelation) {
+        this.commissionRelations.remove(commissionRelation);
         commissionRelation.setPerson(null);
         return this;
     }
 
-    public void setCommissionRels(Set<CommissionRelation> commissionRelations) {
-        this.commissionRels = commissionRelations;
+    public void setCommissionRelations(Set<CommissionRelation> commissionRelations) {
+        this.commissionRelations = commissionRelations;
     }
 
     public Set<Resolution> getCreatorsOfs() {

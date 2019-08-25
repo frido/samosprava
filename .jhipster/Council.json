@@ -35,43 +35,43 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "deputyRelation",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "deputyRels"
+            "relationshipName": "deputyRelation"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "election",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "elections"
+            "relationshipName": "election"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "resolution",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "resolutions"
+            "relationshipName": "resolution"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "councilRelation",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "councilRels"
+            "relationshipName": "councilRelation"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "meeting",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "meetings"
+            "relationshipName": "meeting"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "commission",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "commissions"
+            "relationshipName": "commission"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "department",
             "otherEntityRelationshipName": "council",
-            "relationshipName": "departments"
+            "relationshipName": "department"
         }
     ],
     "changelogDate": "20190824193948",

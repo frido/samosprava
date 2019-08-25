@@ -15,12 +15,12 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "resolution",
             "otherEntityRelationshipName": "meeting",
-            "relationshipName": "resolutions"
+            "relationshipName": "resolution"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "meetings",
+            "otherEntityRelationshipName": "meeting",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"

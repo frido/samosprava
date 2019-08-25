@@ -33,12 +33,12 @@ public class DepartmentRelation implements Serializable {
 
     @DBRef
     @Field("department")
-    @JsonIgnoreProperties("departmentRels")
+    @JsonIgnoreProperties("departmentRelations")
     private Department department;
 
     @DBRef
     @Field("person")
-    @JsonIgnoreProperties("departmentRels")
+    @JsonIgnoreProperties("departmentRelations")
     private Person person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -27,31 +27,31 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "deputyRelation",
             "otherEntityRelationshipName": "person",
-            "relationshipName": "deputyRels"
+            "relationshipName": "deputyRelation"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "vote",
             "otherEntityRelationshipName": "person",
-            "relationshipName": "votes"
+            "relationshipName": "vote"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "councilRelation",
             "otherEntityRelationshipName": "person",
-            "relationshipName": "councilRels"
+            "relationshipName": "councilRelation"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "departmentRelation",
             "otherEntityRelationshipName": "person",
-            "relationshipName": "departmentRels"
+            "relationshipName": "departmentRelation"
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "commissionRelation",
             "otherEntityRelationshipName": "person",
-            "relationshipName": "commissionRels"
+            "relationshipName": "commissionRelation"
         },
         {
             "relationshipType": "many-to-many",

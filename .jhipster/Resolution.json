@@ -47,7 +47,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "resolutions",
+            "otherEntityRelationshipName": "resolution",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"
@@ -55,7 +55,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "meeting",
-            "otherEntityRelationshipName": "resolutions",
+            "otherEntityRelationshipName": "resolution",
             "relationshipValidateRules": "required",
             "relationshipName": "meeting",
             "otherEntityField": "date"

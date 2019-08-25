@@ -20,12 +20,12 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "vote",
             "otherEntityRelationshipName": "election",
-            "relationshipName": "votes"
+            "relationshipName": "vote"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
-            "otherEntityRelationshipName": "elections",
+            "otherEntityRelationshipName": "election",
             "relationshipValidateRules": "required",
             "relationshipName": "council",
             "otherEntityField": "name"

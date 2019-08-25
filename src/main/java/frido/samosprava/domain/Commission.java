@@ -1,14 +1,15 @@
 package frido.samosprava.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Commission.
@@ -28,8 +29,9 @@ public class Commission implements Serializable {
     private String desc;
 
     @DBRef
-    @Field("commissionRels")
-    private Set<CommissionRelation> commissionRels = new HashSet<>();
+    @Field("commissionRelation")
+    @JsonIgnore
+    private Set<CommissionRelation> commissionRelations = new HashSet<>();
 
     @DBRef
     @Field("council")
@@ -71,29 +73,29 @@ public class Commission implements Serializable {
         this.desc = desc;
     }
 
-    public Set<CommissionRelation> getCommissionRels() {
-        return commissionRels;
+    public Set<CommissionRelation> getCommissionRelations() {
+        return commissionRelations;
     }
 
-    public Commission commissionRels(Set<CommissionRelation> commissionRelations) {
-        this.commissionRels = commissionRelations;
+    public Commission commissionRelations(Set<CommissionRelation> commissionRelations) {
+        this.commissionRelations = commissionRelations;
         return this;
     }
 
-    public Commission addCommissionRels(CommissionRelation commissionRelation) {
-        this.commissionRels.add(commissionRelation);
+    public Commission addCommissionRelation(CommissionRelation commissionRelation) {
+        this.commissionRelations.add(commissionRelation);
         commissionRelation.setCommission(this);
         return this;
     }
 
-    public Commission removeCommissionRels(CommissionRelation commissionRelation) {
-        this.commissionRels.remove(commissionRelation);
+    public Commission removeCommissionRelation(CommissionRelation commissionRelation) {
+        this.commissionRelations.remove(commissionRelation);
         commissionRelation.setCommission(null);
         return this;
     }
 
-    public void setCommissionRels(Set<CommissionRelation> commissionRelations) {
-        this.commissionRels = commissionRelations;
+    public void setCommissionRelations(Set<CommissionRelation> commissionRelations) {
+        this.commissionRelations = commissionRelations;
     }
 
     public Council getCouncil() {

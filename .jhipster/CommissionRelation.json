@@ -19,7 +19,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "commission",
-            "otherEntityRelationshipName": "commissionRels",
+            "otherEntityRelationshipName": "commissionRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "commission",
             "otherEntityField": "name"
@@ -27,7 +27,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "person",
-            "otherEntityRelationshipName": "commissionRels",
+            "otherEntityRelationshipName": "commissionRelation",
             "relationshipValidateRules": "required",
             "relationshipName": "person",
             "otherEntityField": "name"

@@ -1,12 +1,14 @@
 package frido.samosprava.domain;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Council.
@@ -41,31 +43,38 @@ public class Council implements Serializable {
     private String fbLink;
 
     @DBRef
-    @Field("deputyRels")
-    private Set<DeputyRelation> deputyRels = new HashSet<>();
+    @Field("deputyRelation")
+    @JsonIgnore
+    private Set<DeputyRelation> deputyRelations = new HashSet<>();
 
     @DBRef
-    @Field("elections")
+    @Field("election")
+    @JsonIgnore
     private Set<Election> elections = new HashSet<>();
 
     @DBRef
-    @Field("resolutions")
+    @Field("resolution")
+    @JsonIgnore
     private Set<Resolution> resolutions = new HashSet<>();
 
     @DBRef
-    @Field("councilRels")
-    private Set<CouncilRelation> councilRels = new HashSet<>();
+    @Field("councilRelation")
+    @JsonIgnore
+    private Set<CouncilRelation> councilRelations = new HashSet<>();
 
     @DBRef
-    @Field("meetings")
+    @Field("meeting")
+    @JsonIgnore
     private Set<Meeting> meetings = new HashSet<>();
 
     @DBRef
-    @Field("commissions")
+    @Field("commission")
+    @JsonIgnore
     private Set<Commission> commissions = new HashSet<>();
 
     @DBRef
-    @Field("departments")
+    @Field("department")
+    @JsonIgnore
     private Set<Department> departments = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -168,29 +177,29 @@ public class Council implements Serializable {
         this.fbLink = fbLink;
     }
 
-    public Set<DeputyRelation> getDeputyRels() {
-        return deputyRels;
+    public Set<DeputyRelation> getDeputyRelations() {
+        return deputyRelations;
     }
 
-    public Council deputyRels(Set<DeputyRelation> deputyRelations) {
-        this.deputyRels = deputyRelations;
+    public Council deputyRelations(Set<DeputyRelation> deputyRelations) {
+        this.deputyRelations = deputyRelations;
         return this;
     }
 
-    public Council addDeputyRels(DeputyRelation deputyRelation) {
-        this.deputyRels.add(deputyRelation);
+    public Council addDeputyRelation(DeputyRelation deputyRelation) {
+        this.deputyRelations.add(deputyRelation);
         deputyRelation.setCouncil(this);
         return this;
     }
 
-    public Council removeDeputyRels(DeputyRelation deputyRelation) {
-        this.deputyRels.remove(deputyRelation);
+    public Council removeDeputyRelation(DeputyRelation deputyRelation) {
+        this.deputyRelations.remove(deputyRelation);
         deputyRelation.setCouncil(null);
         return this;
     }
 
-    public void setDeputyRels(Set<DeputyRelation> deputyRelations) {
-        this.deputyRels = deputyRelations;
+    public void setDeputyRelations(Set<DeputyRelation> deputyRelations) {
+        this.deputyRelations = deputyRelations;
     }
 
     public Set<Election> getElections() {
@@ -202,13 +211,13 @@ public class Council implements Serializable {
         return this;
     }
 
-    public Council addElections(Election election) {
+    public Council addElection(Election election) {
         this.elections.add(election);
         election.setCouncil(this);
         return this;
     }
 
-    public Council removeElections(Election election) {
+    public Council removeElection(Election election) {
         this.elections.remove(election);
         election.setCouncil(null);
         return this;
@@ -227,13 +236,13 @@ public class Council implements Serializable {
         return this;
     }
 
-    public Council addResolutions(Resolution resolution) {
+    public Council addResolution(Resolution resolution) {
         this.resolutions.add(resolution);
         resolution.setCouncil(this);
         return this;
     }
 
-    public Council removeResolutions(Resolution resolution) {
+    public Council removeResolution(Resolution resolution) {
         this.resolutions.remove(resolution);
         resolution.setCouncil(null);
         return this;
@@ -243,29 +252,29 @@ public class Council implements Serializable {
         this.resolutions = resolutions;
     }
 
-    public Set<CouncilRelation> getCouncilRels() {
-        return councilRels;
+    public Set<CouncilRelation> getCouncilRelations() {
+        return councilRelations;
     }
 
-    public Council councilRels(Set<CouncilRelation> councilRelations) {
-        this.councilRels = councilRelations;
+    public Council councilRelations(Set<CouncilRelation> councilRelations) {
+        this.councilRelations = councilRelations;
         return this;
     }
 
-    public Council addCouncilRels(CouncilRelation councilRelation) {
-        this.councilRels.add(councilRelation);
+    public Council addCouncilRelation(CouncilRelation councilRelation) {
+        this.councilRelations.add(councilRelation);
         councilRelation.setCouncil(this);
         return this;
     }
 
-    public Council removeCouncilRels(CouncilRelation councilRelation) {
-        this.councilRels.remove(councilRelation);
+    public Council removeCouncilRelation(CouncilRelation councilRelation) {
+        this.councilRelations.remove(councilRelation);
         councilRelation.setCouncil(null);
         return this;
     }
 
-    public void setCouncilRels(Set<CouncilRelation> councilRelations) {
-        this.councilRels = councilRelations;
+    public void setCouncilRelations(Set<CouncilRelation> councilRelations) {
+        this.councilRelations = councilRelations;
     }
 
     public Set<Meeting> getMeetings() {
@@ -277,13 +286,13 @@ public class Council implements Serializable {
         return this;
     }
 
-    public Council addMeetings(Meeting meeting) {
+    public Council addMeeting(Meeting meeting) {
         this.meetings.add(meeting);
         meeting.setCouncil(this);
         return this;
     }
 
-    public Council removeMeetings(Meeting meeting) {
+    public Council removeMeeting(Meeting meeting) {
         this.meetings.remove(meeting);
         meeting.setCouncil(null);
         return this;
@@ -302,13 +311,13 @@ public class Council implements Serializable {
         return this;
     }
 
-    public Council addCommissions(Commission commission) {
+    public Council addCommission(Commission commission) {
         this.commissions.add(commission);
         commission.setCouncil(this);
         return this;
     }
 
-    public Council removeCommissions(Commission commission) {
+    public Council removeCommission(Commission commission) {
         this.commissions.remove(commission);
         commission.setCouncil(null);
         return this;
@@ -327,13 +336,13 @@ public class Council implements Serializable {
         return this;
     }
 
-    public Council addDepartments(Department department) {
+    public Council addDepartment(Department department) {
         this.departments.add(department);
         department.setCouncil(this);
         return this;
     }
 
-    public Council removeDepartments(Department department) {
+    public Council removeDepartment(Department department) {
         this.departments.remove(department);
         department.setCouncil(null);
         return this;

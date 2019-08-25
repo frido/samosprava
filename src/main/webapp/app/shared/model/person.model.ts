@@ -12,11 +12,11 @@ export interface IPerson {
   suffix?: string;
   club?: string;
   facebook?: string;
-  deputyRels?: IDeputyRelation[];
+  deputyRelations?: IDeputyRelation[];
   votes?: IVote[];
-  councilRels?: ICouncilRelation[];
-  departmentRels?: IDepartmentRelation[];
-  commissionRels?: ICommissionRelation[];
+  councilRelations?: ICouncilRelation[];
+  departmentRelations?: IDepartmentRelation[];
+  commissionRelations?: ICommissionRelation[];
   creatorsOfs?: IResolution[];
 }
 
@@ -28,11 +28,11 @@ export class Person implements IPerson {
     public suffix?: string,
     public club?: string,
     public facebook?: string,
-    public deputyRels?: IDeputyRelation[],
+    public deputyRelations?: IDeputyRelation[],
     public votes?: IVote[],
-    public councilRels?: ICouncilRelation[],
-    public departmentRels?: IDepartmentRelation[],
-    public commissionRels?: ICommissionRelation[],
+    public councilRelations?: ICouncilRelation[],
+    public departmentRelations?: IDepartmentRelation[],
+    public commissionRelations?: ICommissionRelation[],
     public creatorsOfs?: IResolution[]
   ) {}
 }

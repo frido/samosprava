@@ -21,7 +21,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "election",
-            "otherEntityRelationshipName": "votes",
+            "otherEntityRelationshipName": "vote",
             "relationshipValidateRules": "required",
             "relationshipName": "election",
             "otherEntityField": "name"
@@ -29,7 +29,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "person",
-            "otherEntityRelationshipName": "votes",
+            "otherEntityRelationshipName": "vote",
             "relationshipValidateRules": "required",
             "relationshipName": "person",
             "otherEntityField": "name"

@@ -1,15 +1,16 @@
 package frido.samosprava.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import javax.validation.constraints.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Meeting.
@@ -29,7 +30,8 @@ public class Meeting implements Serializable {
     private String place;
 
     @DBRef
-    @Field("resolutions")
+    @Field("resolution")
+    @JsonIgnore
     private Set<Resolution> resolutions = new HashSet<>();
 
     @DBRef
@@ -81,13 +83,13 @@ public class Meeting implements Serializable {
         return this;
     }
 
-    public Meeting addResolutions(Resolution resolution) {
+    public Meeting addResolution(Resolution resolution) {
         this.resolutions.add(resolution);
         resolution.setMeeting(this);
         return this;
     }
 
-    public Meeting removeResolutions(Resolution resolution) {
+    public Meeting removeResolution(Resolution resolution) {
         this.resolutions.remove(resolution);
         resolution.setMeeting(null);
         return this;
