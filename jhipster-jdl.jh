@@ -129,7 +129,7 @@ relationship OneToMany {
 }
 
 relationship ManyToMany {
-  Resolution{creators} to Person{creatorsOf}
+  Resolution{creators(name)} to Person{creatorsOf}
 }
 
 relationship OneToMany {

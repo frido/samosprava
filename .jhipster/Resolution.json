@@ -41,7 +41,7 @@
             "otherEntityName": "person",
             "otherEntityRelationshipName": "creatorsOf",
             "relationshipName": "creators",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {

@@ -45,7 +45,7 @@
                 <td>{{resolution.source}}</td>
                 <td>
                     <span *ngFor="let creators of resolution.creators; let last = last">
-                            <a class="form-control-static" [routerLink]="['/person', creators?.id, 'view' ]">{{creators.id}}</a>{{last ? '' : ', '}}
+                            <a class="form-control-static" [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td>

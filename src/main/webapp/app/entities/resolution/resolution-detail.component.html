@@ -40,7 +40,7 @@
                 <dt><span>Creators</span></dt>
                 <dd>
                     <span *ngFor="let creators of resolution.creators; let last = last">
-                        <a [routerLink]="['/person', creators?.id, 'view' ]">{{creators.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span>Council</span></dt>
