@@ -67,6 +67,13 @@
                         <a [routerLink]="['/meeting', resolution.meeting?.id, 'view']">{{resolution.meeting?.date}}</a>
                     </div>
                 </dd>
+                <dt><span>Decisions</span></dt>
+                <dd>
+                        <dl class="row-md jh-entity-details" *ngFor="let decision of resolution.decisions">
+                            <dt>{{decision.status}}</dt>
+                            <dd>{{decision.description}}</dd>
+                        </dl>
+                </dd>
             </dl>
 
             <button type="submit"

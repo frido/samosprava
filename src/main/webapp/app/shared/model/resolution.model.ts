@@ -1,6 +1,7 @@
 import { IPerson } from 'app/shared/model/person.model';
 import { ICouncil } from 'app/shared/model/council.model';
 import { IMeeting } from 'app/shared/model/meeting.model';
+import { IDecision } from './decision.model';
 
 export const enum ResolutionType {
   RENT = 'RENT',
@@ -33,6 +34,7 @@ export interface IResolution {
   voteAgainsts?: IPerson[];
   council?: ICouncil;
   meeting?: IMeeting;
+  decisions?: IDecision[];
 }
 
 export class Resolution implements IResolution {
@@ -50,6 +52,7 @@ export class Resolution implements IResolution {
     public voteFors?: IPerson[],
     public voteAgainsts?: IPerson[],
     public council?: ICouncil,
-    public meeting?: IMeeting
+    public meeting?: IMeeting,
+    public decisions?: IDecision[]
   ) {}
 }

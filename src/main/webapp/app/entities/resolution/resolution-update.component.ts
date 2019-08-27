@@ -13,6 +13,7 @@ import { ICouncil } from 'app/shared/model/council.model';
 import { CouncilService } from 'app/entities/council';
 import { IMeeting } from 'app/shared/model/meeting.model';
 import { MeetingService } from 'app/entities/meeting';
+import { Decision } from 'app/shared/model/decision.model';
 
 @Component({
   selector: 'jhi-resolution-update',
@@ -26,6 +27,8 @@ export class ResolutionUpdateComponent implements OnInit {
   councils: ICouncil[];
 
   meetings: IMeeting[];
+
+  resolution: IResolution;
 
   editForm = this.fb.group({
     id: [],
@@ -99,10 +102,18 @@ export class ResolutionUpdateComponent implements OnInit {
       council: resolution.council,
       meeting: resolution.meeting
     });
+    this.resolution = resolution;
   }
 
   previousState() {
     window.history.back();
+  }
+
+  addDecision() {
+    if (!this.resolution.decisions) {
+      this.resolution.decisions = [];
+    }
+    this.resolution.decisions.push(new Decision());
   }
 
   save() {
@@ -131,7 +142,9 @@ export class ResolutionUpdateComponent implements OnInit {
       voteFors: this.editForm.get(['voteFors']).value,
       voteAgainsts: this.editForm.get(['voteAgainsts']).value,
       council: this.editForm.get(['council']).value,
-      meeting: this.editForm.get(['meeting']).value
+      meeting: this.editForm.get(['meeting']).value,
+      // TODO: quick fix
+      decisions: this.resolution.decisions
     };
   }
 

@@ -6,13 +6,11 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_number">Number</label>
-                    <input type="text" class="form-control" name="number" id="field_number"
-                           formControlName="number"/>
+                    <input type="text" class="form-control" name="number" id="field_number" formControlName="number" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
@@ -34,63 +32,70 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_title">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                           formControlName="title"/>
+                    <input type="text" class="form-control" name="title" id="field_title" formControlName="title" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
-                           formControlName="description"/>
+                        formControlName="description" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_voteFor">Vote For</label>
                     <input type="number" class="form-control" name="voteFor" id="field_voteFor"
-                           formControlName="voteFor"/>
+                        formControlName="voteFor" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_voteAgainst">Vote Against</label>
                     <input type="number" class="form-control" name="voteAgainst" id="field_voteAgainst"
-                           formControlName="voteAgainst"/>
+                        formControlName="voteAgainst" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_presented">Presented</label>
                     <input type="number" class="form-control" name="presented" id="field_presented"
-                           formControlName="presented"/>
+                        formControlName="presented" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_source">Source</label>
-                    <input type="text" class="form-control" name="source" id="field_source"
-                           formControlName="source"/>
+                    <input type="text" class="form-control" name="source" id="field_source" formControlName="source" />
                 </div>
 
                 <div class="form-group">
                     <label for="field_creators">Creators</label>
-                    <select class="form-control" id="field_creators" multiple name="creators" formControlName="creators">
-                        <option [ngValue]="getSelected(editForm.get('creators').value, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    <select class="form-control" id="field_creators" multiple name="creators"
+                        formControlName="creators">
+                        <option [ngValue]="getSelected(editForm.get('creators').value, personOption)"
+                            *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="field_voteFors">Vote For</label>
-                    <select class="form-control" id="field_voteFors" multiple name="voteFors" formControlName="voteFors">
-                        <option [ngValue]="getSelected(editForm.get('voteFors').value, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    <select class="form-control" id="field_voteFors" multiple name="voteFors"
+                        formControlName="voteFors">
+                        <option [ngValue]="getSelected(editForm.get('voteFors').value, personOption)"
+                            *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="field_voteAgainsts">Vote Against</label>
-                    <select class="form-control" id="field_voteAgainsts" multiple name="voteAgainsts" formControlName="voteAgainsts">
-                        <option [ngValue]="getSelected(editForm.get('voteAgainsts').value, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    <select class="form-control" id="field_voteAgainsts" multiple name="voteAgainsts"
+                        formControlName="voteAgainsts">
+                        <option [ngValue]="getSelected(editForm.get('voteAgainsts').value, personOption)"
+                            *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_council">Council</label>
                     <select class="form-control" id="field_council" name="council" formControlName="council">
                         <option *ngIf="!editForm.get('council').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="councilOption.id === editForm.get('council').value?.id ? editForm.get('council').value : councilOption" *ngFor="let councilOption of councils; trackBy: trackCouncilById">{{councilOption.name}}</option>
+                        <option
+                            [ngValue]="councilOption.id === editForm.get('council').value?.id ? editForm.get('council').value : councilOption"
+                            *ngFor="let councilOption of councils; trackBy: trackCouncilById">{{councilOption.name}}
+                        </option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('council').invalid && (editForm.get('council').dirty || editForm.get('council').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('council').errors.required">
+                <div
+                    *ngIf="editForm.get('council').invalid && (editForm.get('council').dirty || editForm.get('council').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('council').errors.required">
                         This field is required.
                     </small>
                 </div>
@@ -98,24 +103,46 @@
                     <label class="form-control-label" for="field_meeting">Meeting</label>
                     <select class="form-control" id="field_meeting" name="meeting" formControlName="meeting">
                         <option *ngIf="!editForm.get('meeting').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="meetingOption.id === editForm.get('meeting').value?.id ? editForm.get('meeting').value : meetingOption" *ngFor="let meetingOption of meetings; trackBy: trackMeetingById">{{meetingOption.date}}</option>
+                        <option
+                            [ngValue]="meetingOption.id === editForm.get('meeting').value?.id ? editForm.get('meeting').value : meetingOption"
+                            *ngFor="let meetingOption of meetings; trackBy: trackMeetingById">{{meetingOption.date}}
+                        </option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('meeting').invalid && (editForm.get('meeting').dirty || editForm.get('meeting').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('meeting').errors.required">
+                <div
+                    *ngIf="editForm.get('meeting').invalid && (editForm.get('meeting').dirty || editForm.get('meeting').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('meeting').errors.required">
                         This field is required.
                     </small>
                 </div>
             </div>
+
+            {{resolution | json}}
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
         </form>
+        <button type="button" id="vysledok-add" class="btn btn-secondary" (click)="addDecision()">
+                Add Decision
+            </button>
+
+            <div *ngFor="let decision of resolution.decisions;">
+                Decision
+                <div class="form-group">
+                    <label class="form-control-label">Status</label>
+                    <input type="text" class="form-control" [(ngModel)]="decision.status"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="decision.description"/>
+                </div>
+            </div>
     </div>
 </div>

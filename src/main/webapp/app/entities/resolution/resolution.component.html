@@ -1,101 +1,36 @@
 <div>
     <h2 id="page-heading">
         <span>Resolutions</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resolution" [routerLink]="['/resolution/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resolution"
+            [routerLink]="['/resolution/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create a new Resolution
+            <span>
+                Create a new Resolution
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
-    <br/>
+    <br />
     <div class="alert alert-warning" *ngIf="resolutions?.length === 0">
         <span>No resolutions found</span>
     </div>
-    <div class="table-responsive" *ngIf="resolutions?.length > 0">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Number</span></th>
-            <th><span>Type</span></th>
-            <th><span>Title</span></th>
-            <th><span>Description</span></th>
-            <th><span>Vote For</span></th>
-            <th><span>Vote Against</span></th>
-            <th><span>Presented</span></th>
-            <th><span>Source</span></th>
-            <th><span>Creators</span></th>
-            <th><span>Vote For</span></th>
-            <th><span>Vote Against</span></th>
-            <th><span>Council</span></th>
-            <th><span>Meeting</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let resolution of resolutions ;trackBy: trackId">
-                <td><a [routerLink]="['/resolution', resolution.id, 'view' ]">{{resolution.id}}</a></td>
-                <td>{{resolution.number}}</td>
-                <td>{{resolution.type}}</td>
-                <td>{{resolution.title}}</td>
-                <td>{{resolution.description}}</td>
-                <td>{{resolution.voteFor}}</td>
-                <td>{{resolution.voteAgainst}}</td>
-                <td>{{resolution.presented}}</td>
-                <td>{{resolution.source}}</td>
-                <td>
-                    <span *ngFor="let creators of resolution.creators; let last = last">
-                            <a class="form-control-static" [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <span *ngFor="let voteFor of resolution.voteFors; let last = last">
-                            <a class="form-control-static" [routerLink]="['/person', voteFor?.id, 'view' ]">{{voteFor.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <span *ngFor="let voteAgainst of resolution.voteAgainsts; let last = last">
-                            <a class="form-control-static" [routerLink]="['/person', voteAgainst?.id, 'view' ]">{{voteAgainst.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <div *ngIf="resolution.council">
-                        <a [routerLink]="['/council', resolution.council?.id, 'view' ]" >{{resolution.council?.name}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="resolution.meeting">
-                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view' ]" >{{resolution.meeting?.date}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button type="submit"
-                                [routerLink]="['/resolution', resolution.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/resolution', resolution.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/resolution', { outlets: { popup: resolution.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let resolution of resolutions ;trackBy: trackId">
+            <h5 class="mb-1">
+                <a [routerLink]="['/resolution', resolution.id, 'view' ]">
+                    {{resolution.title}}
+                </a>
+            </h5>
+            <small>
+                <span *ngFor="let creators of resolution.creators; let last = last">
+                    <a class="form-control-static"
+                        [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>
+                </span>
+            </small>
+            <!-- TODO: fix rights
+            <a class="form-control-static" [routerLink]="['/resolution', resolution.id, 'edit']">EDIT</a>
+            -->
+        </li>
+    </ul>
 </div>

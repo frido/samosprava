@@ -69,6 +69,9 @@ public class Resolution implements Serializable {
     @JsonIgnoreProperties("resolutions")
     private Meeting meeting;
 
+    @Field("decisions")
+    private Set<Decision> decisions;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -281,6 +284,15 @@ public class Resolution implements Serializable {
 
     public void setMeeting(Meeting meeting) {
         this.meeting = meeting;
+    }
+
+    public Set<Decision> getDecisions() {
+        return decisions;
+    }
+
+    public Resolution decisions(Set<Decision> decisions) {
+        this.decisions = decisions;
+        return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
