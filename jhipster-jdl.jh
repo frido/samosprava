@@ -132,6 +132,14 @@ relationship ManyToMany {
   Resolution{creators(name)} to Person{creatorsOf}
 }
 
+relationship ManyToMany {
+  Resolution{voteFor(name)} to Person{voteForOf}
+}
+
+relationship ManyToMany {
+  Resolution{voteAgainst(name)} to Person{voteAgainstOf}
+}
+
 relationship OneToMany {
   Council to CouncilRelation{council(name) required}
   Person to CouncilRelation{person(name) required}

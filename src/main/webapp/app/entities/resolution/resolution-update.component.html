@@ -70,6 +70,18 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="field_voteFors">Vote For</label>
+                    <select class="form-control" id="field_voteFors" multiple name="voteFors" formControlName="voteFors">
+                        <option [ngValue]="getSelected(editForm.get('voteFors').value, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_voteAgainsts">Vote Against</label>
+                    <select class="form-control" id="field_voteAgainsts" multiple name="voteAgainsts" formControlName="voteAgainsts">
+                        <option [ngValue]="getSelected(editForm.get('voteAgainsts').value, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" for="field_council">Council</label>
                     <select class="form-control" id="field_council" name="council" formControlName="council">
                         <option *ngIf="!editForm.get('council').value" [ngValue]="null" selected></option>

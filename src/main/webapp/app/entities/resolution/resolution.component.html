@@ -27,6 +27,8 @@
             <th><span>Presented</span></th>
             <th><span>Source</span></th>
             <th><span>Creators</span></th>
+            <th><span>Vote For</span></th>
+            <th><span>Vote Against</span></th>
             <th><span>Council</span></th>
             <th><span>Meeting</span></th>
             <th></th>
@@ -46,6 +48,16 @@
                 <td>
                     <span *ngFor="let creators of resolution.creators; let last = last">
                             <a class="form-control-static" [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let voteFor of resolution.voteFors; let last = last">
+                            <a class="form-control-static" [routerLink]="['/person', voteFor?.id, 'view' ]">{{voteFor.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let voteAgainst of resolution.voteAgainsts; let last = last">
+                            <a class="form-control-static" [routerLink]="['/person', voteAgainst?.id, 'view' ]">{{voteAgainst.name}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td>

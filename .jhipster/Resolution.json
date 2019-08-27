@@ -45,6 +45,22 @@
             "ownerSide": true
         },
         {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "voteForOf",
+            "relationshipName": "voteFor",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "voteAgainstOf",
+            "relationshipName": "voteAgainst",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "council",
             "otherEntityRelationshipName": "resolution",

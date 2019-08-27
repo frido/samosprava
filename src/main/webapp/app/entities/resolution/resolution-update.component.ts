@@ -38,6 +38,8 @@ export class ResolutionUpdateComponent implements OnInit {
     presented: [],
     source: [],
     creators: [],
+    voteFors: [],
+    voteAgainsts: [],
     council: [null, Validators.required],
     meeting: [null, Validators.required]
   });
@@ -92,6 +94,8 @@ export class ResolutionUpdateComponent implements OnInit {
       presented: resolution.presented,
       source: resolution.source,
       creators: resolution.creators,
+      voteFors: resolution.voteFors,
+      voteAgainsts: resolution.voteAgainsts,
       council: resolution.council,
       meeting: resolution.meeting
     });
@@ -124,6 +128,8 @@ export class ResolutionUpdateComponent implements OnInit {
       presented: this.editForm.get(['presented']).value,
       source: this.editForm.get(['source']).value,
       creators: this.editForm.get(['creators']).value,
+      voteFors: this.editForm.get(['voteFors']).value,
+      voteAgainsts: this.editForm.get(['voteAgainsts']).value,
       council: this.editForm.get(['council']).value,
       meeting: this.editForm.get(['meeting']).value
     };

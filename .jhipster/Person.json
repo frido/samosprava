@@ -60,6 +60,22 @@
             "relationshipName": "creatorsOf",
             "otherEntityField": "id",
             "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "voteFor",
+            "relationshipName": "voteForOf",
+            "otherEntityField": "id",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "resolution",
+            "otherEntityRelationshipName": "voteAgainst",
+            "relationshipName": "voteAgainstOf",
+            "otherEntityField": "id",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20190824193957",

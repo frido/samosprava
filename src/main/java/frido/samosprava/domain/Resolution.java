@@ -52,6 +52,14 @@ public class Resolution implements Serializable {
     private Set<Person> creators = new HashSet<>();
 
     @DBRef
+    @Field("voteFors")
+    private Set<Person> voteFors = new HashSet<>();
+
+    @DBRef
+    @Field("voteAgainsts")
+    private Set<Person> voteAgainsts = new HashSet<>();
+
+    @DBRef
     @Field("council")
     @JsonIgnoreProperties("resolutions")
     private Council council;
@@ -197,6 +205,56 @@ public class Resolution implements Serializable {
 
     public void setCreators(Set<Person> people) {
         this.creators = people;
+    }
+
+    public Set<Person> getVoteFors() {
+        return voteFors;
+    }
+
+    public Resolution voteFors(Set<Person> people) {
+        this.voteFors = people;
+        return this;
+    }
+
+    public Resolution addVoteFor(Person person) {
+        this.voteFors.add(person);
+        person.getVoteForOfs().add(this);
+        return this;
+    }
+
+    public Resolution removeVoteFor(Person person) {
+        this.voteFors.remove(person);
+        person.getVoteForOfs().remove(this);
+        return this;
+    }
+
+    public void setVoteFors(Set<Person> people) {
+        this.voteFors = people;
+    }
+
+    public Set<Person> getVoteAgainsts() {
+        return voteAgainsts;
+    }
+
+    public Resolution voteAgainsts(Set<Person> people) {
+        this.voteAgainsts = people;
+        return this;
+    }
+
+    public Resolution addVoteAgainst(Person person) {
+        this.voteAgainsts.add(person);
+        person.getVoteAgainstOfs().add(this);
+        return this;
+    }
+
+    public Resolution removeVoteAgainst(Person person) {
+        this.voteAgainsts.remove(person);
+        person.getVoteAgainstOfs().remove(this);
+        return this;
+    }
+
+    public void setVoteAgainsts(Set<Person> people) {
+        this.voteAgainsts = people;
     }
 
     public Council getCouncil() {

@@ -18,6 +18,8 @@ export interface IPerson {
   departmentRelations?: IDepartmentRelation[];
   commissionRelations?: ICommissionRelation[];
   creatorsOfs?: IResolution[];
+  voteForOfs?: IResolution[];
+  voteAgainstOfs?: IResolution[];
 }
 
 export class Person implements IPerson {
@@ -33,6 +35,8 @@ export class Person implements IPerson {
     public councilRelations?: ICouncilRelation[],
     public departmentRelations?: IDepartmentRelation[],
     public commissionRelations?: ICommissionRelation[],
-    public creatorsOfs?: IResolution[]
+    public creatorsOfs?: IResolution[],
+    public voteForOfs?: IResolution[],
+    public voteAgainstOfs?: IResolution[]
   ) {}
 }

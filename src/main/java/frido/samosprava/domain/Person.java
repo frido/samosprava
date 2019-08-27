@@ -1,14 +1,13 @@
 package frido.samosprava.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Person.
@@ -38,7 +37,6 @@ public class Person implements Serializable {
 
     @DBRef
     @Field("deputyRelation")
-    @JsonIgnore
     private Set<DeputyRelation> deputyRelations = new HashSet<>();
 
     @DBRef
@@ -47,23 +45,30 @@ public class Person implements Serializable {
 
     @DBRef
     @Field("councilRelation")
-    @JsonIgnore
     private Set<CouncilRelation> councilRelations = new HashSet<>();
 
     @DBRef
     @Field("departmentRelation")
-    @JsonIgnore
     private Set<DepartmentRelation> departmentRelations = new HashSet<>();
 
     @DBRef
     @Field("commissionRelation")
-    @JsonIgnore
     private Set<CommissionRelation> commissionRelations = new HashSet<>();
 
     @DBRef
     @Field("creatorsOfs")
     @JsonIgnore
     private Set<Resolution> creatorsOfs = new HashSet<>();
+
+    @DBRef
+    @Field("voteForOfs")
+    @JsonIgnore
+    private Set<Resolution> voteForOfs = new HashSet<>();
+
+    @DBRef
+    @Field("voteAgainstOfs")
+    @JsonIgnore
+    private Set<Resolution> voteAgainstOfs = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -287,6 +292,56 @@ public class Person implements Serializable {
 
     public void setCreatorsOfs(Set<Resolution> resolutions) {
         this.creatorsOfs = resolutions;
+    }
+
+    public Set<Resolution> getVoteForOfs() {
+        return voteForOfs;
+    }
+
+    public Person voteForOfs(Set<Resolution> resolutions) {
+        this.voteForOfs = resolutions;
+        return this;
+    }
+
+    public Person addVoteForOf(Resolution resolution) {
+        this.voteForOfs.add(resolution);
+        resolution.getVoteFors().add(this);
+        return this;
+    }
+
+    public Person removeVoteForOf(Resolution resolution) {
+        this.voteForOfs.remove(resolution);
+        resolution.getVoteFors().remove(this);
+        return this;
+    }
+
+    public void setVoteForOfs(Set<Resolution> resolutions) {
+        this.voteForOfs = resolutions;
+    }
+
+    public Set<Resolution> getVoteAgainstOfs() {
+        return voteAgainstOfs;
+    }
+
+    public Person voteAgainstOfs(Set<Resolution> resolutions) {
+        this.voteAgainstOfs = resolutions;
+        return this;
+    }
+
+    public Person addVoteAgainstOf(Resolution resolution) {
+        this.voteAgainstOfs.add(resolution);
+        resolution.getVoteAgainsts().add(this);
+        return this;
+    }
+
+    public Person removeVoteAgainstOf(Resolution resolution) {
+        this.voteAgainstOfs.remove(resolution);
+        resolution.getVoteAgainsts().remove(this);
+        return this;
+    }
+
+    public void setVoteAgainstOfs(Set<Resolution> resolutions) {
+        this.voteAgainstOfs = resolutions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
