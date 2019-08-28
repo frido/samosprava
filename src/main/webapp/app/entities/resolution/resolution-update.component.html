@@ -71,7 +71,7 @@
                                 <option
                                     [ngValue]="meetingOption.id === editForm.get('meeting').value?.id ? editForm.get('meeting').value : meetingOption"
                                     *ngFor="let meetingOption of meetings; trackBy: trackMeetingById">
-                                    {{meetingOption.date}}
+                                    {{meetingOption.date | date:'shortDate'}}
                                 </option>
                             </select>
                         </div>
