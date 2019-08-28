@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -44,7 +44,8 @@ export class ResolutionUpdateComponent implements OnInit {
     voteFors: [],
     voteAgainsts: [],
     council: [null, Validators.required],
-    meeting: [null, Validators.required]
+    meeting: [null, Validators.required],
+    decisions: this.fb.array([])
   });
 
   constructor(
@@ -86,6 +87,12 @@ export class ResolutionUpdateComponent implements OnInit {
   }
 
   updateForm(resolution: IResolution) {
+    this.decisions.clear();
+    if (resolution.decisions) {
+      resolution.decisions.forEach(decision => {
+        this.addDecision();
+      });
+    }
     this.editForm.patchValue({
       id: resolution.id,
       number: resolution.number,
@@ -100,20 +107,30 @@ export class ResolutionUpdateComponent implements OnInit {
       voteFors: resolution.voteFors,
       voteAgainsts: resolution.voteAgainsts,
       council: resolution.council,
-      meeting: resolution.meeting
+      meeting: resolution.meeting,
+      decisions: resolution.decisions ? resolution.decisions : []
     });
-    this.resolution = resolution;
   }
 
   previousState() {
     window.history.back();
   }
 
+  get decisions() {
+    return this.editForm.get('decisions') as FormArray;
+  }
+
   addDecision() {
-    if (!this.resolution.decisions) {
-      this.resolution.decisions = [];
-    }
-    this.resolution.decisions.push(new Decision());
+    this.decisions.push(
+      this.fb.group({
+        status: [null, Validators.required],
+        description: []
+      })
+    );
+  }
+
+  deleteDecision(index: number) {
+    this.decisions.removeAt(index);
   }
 
   save() {
@@ -143,8 +160,9 @@ export class ResolutionUpdateComponent implements OnInit {
       voteAgainsts: this.editForm.get(['voteAgainsts']).value,
       council: this.editForm.get(['council']).value,
       meeting: this.editForm.get(['meeting']).value,
-      // TODO: quick fix
-      decisions: this.resolution.decisions
+      decisions: this.decisions.controls.map(
+        (c: AbstractControl) => new Decision(null, c.get(['status']).value, c.get(['description']).value)
+      )
     };
   }
 

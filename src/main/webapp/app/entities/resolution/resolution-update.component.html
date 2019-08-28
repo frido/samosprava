@@ -117,7 +117,36 @@
                 </div>
             </div>
 
-            {{resolution | json}}
+
+            <div formArrayName="decisions">
+                <h3>Decisions</h3>
+                <div *ngFor="let decision of decisions.controls; let i=index">
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_status{{i}}">Status</label>
+                        <input type="text" class="form-control" name="field_status{{i}}" id="field_status{{i}}"
+                            [formControl]="decision.controls.status" />
+                    </div>
+                    <div
+                        *ngIf="decision.get('status').invalid && (decision.get('status').dirty || decision.get('status').touched)">
+                        <small class="form-text text-danger" *ngIf="decision.get('status').errors.required">
+                            This field is required.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="field_description{{i}}">Description</label>
+                        <input type="text" class="form-control" name="field_description{{i}}" id="field_description{{i}}"
+                            [formControl]="decision.controls.description" />
+                    </div>
+                    <div
+                        *ngIf="decision.get('description').invalid && (decision.get('description').dirty || decision.get('description').touched)">
+                        <small class="form-text text-danger" *ngIf="decision.get('description').errors.required">
+                            This field is required.
+                        </small>
+                    </div>
+                    <a (click)="deleteDecision(i)" type="button" class="btn btn-secondary">Delete decision</a>
+                </div>
+                <a (click)="addDecision()" type="button" class="btn btn-secondary">Add decision</a>
+            </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
@@ -129,20 +158,5 @@
                 </button>
             </div>
         </form>
-        <button type="button" id="vysledok-add" class="btn btn-secondary" (click)="addDecision()">
-                Add Decision
-            </button>
-
-            <div *ngFor="let decision of resolution.decisions;">
-                Decision
-                <div class="form-group">
-                    <label class="form-control-label">Status</label>
-                    <input type="text" class="form-control" [(ngModel)]="decision.status"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">Description</label>
-                    <input type="text" class="form-control" [(ngModel)]="decision.description"/>
-                </div>
-            </div>
     </div>
 </div>
