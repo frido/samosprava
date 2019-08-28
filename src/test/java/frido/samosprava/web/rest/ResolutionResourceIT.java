@@ -52,14 +52,6 @@ public class ResolutionResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_VOTE_FOR = 1;
-    private static final Integer UPDATED_VOTE_FOR = 2;
-    private static final Integer SMALLER_VOTE_FOR = 1 - 1;
-
-    private static final Integer DEFAULT_VOTE_AGAINST = 1;
-    private static final Integer UPDATED_VOTE_AGAINST = 2;
-    private static final Integer SMALLER_VOTE_AGAINST = 1 - 1;
-
     private static final Integer DEFAULT_PRESENTED = 1;
     private static final Integer UPDATED_PRESENTED = 2;
     private static final Integer SMALLER_PRESENTED = 1 - 1;
@@ -113,8 +105,6 @@ public class ResolutionResourceIT {
             .type(DEFAULT_TYPE)
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
-            .voteFor(DEFAULT_VOTE_FOR)
-            .voteAgainst(DEFAULT_VOTE_AGAINST)
             .presented(DEFAULT_PRESENTED)
             .source(DEFAULT_SOURCE);
         // Add required entity
@@ -141,8 +131,6 @@ public class ResolutionResourceIT {
             .type(UPDATED_TYPE)
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .voteFor(UPDATED_VOTE_FOR)
-            .voteAgainst(UPDATED_VOTE_AGAINST)
             .presented(UPDATED_PRESENTED)
             .source(UPDATED_SOURCE);
         // Add required entity
@@ -182,8 +170,6 @@ public class ResolutionResourceIT {
         assertThat(testResolution.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testResolution.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testResolution.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testResolution.getVoteFor()).isEqualTo(DEFAULT_VOTE_FOR);
-        assertThat(testResolution.getVoteAgainst()).isEqualTo(DEFAULT_VOTE_AGAINST);
         assertThat(testResolution.getPresented()).isEqualTo(DEFAULT_PRESENTED);
         assertThat(testResolution.getSource()).isEqualTo(DEFAULT_SOURCE);
     }
@@ -221,8 +207,6 @@ public class ResolutionResourceIT {
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].voteFor").value(hasItem(DEFAULT_VOTE_FOR)))
-            .andExpect(jsonPath("$.[*].voteAgainst").value(hasItem(DEFAULT_VOTE_AGAINST)))
             .andExpect(jsonPath("$.[*].presented").value(hasItem(DEFAULT_PRESENTED)))
             .andExpect(jsonPath("$.[*].source").value(hasItem(DEFAULT_SOURCE.toString())));
     }
@@ -274,8 +258,6 @@ public class ResolutionResourceIT {
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.voteFor").value(DEFAULT_VOTE_FOR))
-            .andExpect(jsonPath("$.voteAgainst").value(DEFAULT_VOTE_AGAINST))
             .andExpect(jsonPath("$.presented").value(DEFAULT_PRESENTED))
             .andExpect(jsonPath("$.source").value(DEFAULT_SOURCE.toString()));
     }
@@ -301,8 +283,6 @@ public class ResolutionResourceIT {
             .type(UPDATED_TYPE)
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .voteFor(UPDATED_VOTE_FOR)
-            .voteAgainst(UPDATED_VOTE_AGAINST)
             .presented(UPDATED_PRESENTED)
             .source(UPDATED_SOURCE);
 
@@ -319,8 +299,6 @@ public class ResolutionResourceIT {
         assertThat(testResolution.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testResolution.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testResolution.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testResolution.getVoteFor()).isEqualTo(UPDATED_VOTE_FOR);
-        assertThat(testResolution.getVoteAgainst()).isEqualTo(UPDATED_VOTE_AGAINST);
         assertThat(testResolution.getPresented()).isEqualTo(UPDATED_PRESENTED);
         assertThat(testResolution.getSource()).isEqualTo(UPDATED_SOURCE);
     }

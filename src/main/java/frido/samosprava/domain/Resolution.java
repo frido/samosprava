@@ -35,12 +35,6 @@ public class Resolution implements Serializable {
     @Field("description")
     private String description;
 
-    @Field("vote_for")
-    private Integer voteFor;
-
-    @Field("vote_against")
-    private Integer voteAgainst;
-
     @Field("presented")
     private Integer presented;
 
@@ -131,32 +125,6 @@ public class Resolution implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getVoteFor() {
-        return voteFor;
-    }
-
-    public Resolution voteFor(Integer voteFor) {
-        this.voteFor = voteFor;
-        return this;
-    }
-
-    public void setVoteFor(Integer voteFor) {
-        this.voteFor = voteFor;
-    }
-
-    public Integer getVoteAgainst() {
-        return voteAgainst;
-    }
-
-    public Resolution voteAgainst(Integer voteAgainst) {
-        this.voteAgainst = voteAgainst;
-        return this;
-    }
-
-    public void setVoteAgainst(Integer voteAgainst) {
-        this.voteAgainst = voteAgainst;
     }
 
     public Integer getPresented() {
@@ -320,8 +288,6 @@ public class Resolution implements Serializable {
             ", type='" + getType() + "'" +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", voteFor=" + getVoteFor() +
-            ", voteAgainst=" + getVoteAgainst() +
             ", presented=" + getPresented() +
             ", source='" + getSource() + "'" +
             "}";

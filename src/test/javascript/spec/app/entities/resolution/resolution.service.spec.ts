@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ResolutionService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Resolution('ID', 'AAAAAAA', ResolutionType.RENT, 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 'AAAAAAA');
+      elemDefault = new Resolution('ID', 'AAAAAAA', ResolutionType.RENT, 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -63,8 +63,6 @@ describe('Service Tests', () => {
             type: 'BBBBBB',
             title: 'BBBBBB',
             description: 'BBBBBB',
-            voteFor: 1,
-            voteAgainst: 1,
             presented: 1,
             source: 'BBBBBB'
           },
@@ -88,8 +86,6 @@ describe('Service Tests', () => {
             type: 'BBBBBB',
             title: 'BBBBBB',
             description: 'BBBBBB',
-            voteFor: 1,
-            voteAgainst: 1,
             presented: 1,
             source: 'BBBBBB'
           },

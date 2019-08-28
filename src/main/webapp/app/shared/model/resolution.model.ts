@@ -25,8 +25,6 @@ export interface IResolution {
   type?: ResolutionType;
   title?: string;
   description?: string;
-  voteFor?: number;
-  voteAgainst?: number;
   presented?: number;
   source?: string;
   creators?: IPerson[];
@@ -44,8 +42,6 @@ export class Resolution implements IResolution {
     public type?: ResolutionType,
     public title?: string,
     public description?: string,
-    public voteFor?: number,
-    public voteAgainst?: number,
     public presented?: number,
     public source?: string,
     public creators?: IPerson[],

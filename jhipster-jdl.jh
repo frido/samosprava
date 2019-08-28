@@ -69,8 +69,6 @@ entity Resolution {
     type ResolutionType
     title String
     description String
-    voteFor Integer
-    voteAgainst Integer
     presented Integer
     source String
 }

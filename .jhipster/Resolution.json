@@ -19,14 +19,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "voteFor",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "voteAgainst",
-            "fieldType": "Integer"
-        },
-        {
             "fieldName": "presented",
             "fieldType": "Integer"
         },
