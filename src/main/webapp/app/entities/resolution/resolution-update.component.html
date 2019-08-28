@@ -1,39 +1,47 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-resolution-heading">Create or edit a Resolution</h2>
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <h2 id="jhi-resolution-heading">Create or edit a Resolution</h2>
+    <div class="row justify-content-center">
+        <div class="col-8">
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
+                <div class="form-group" [hidden]="true">
                     <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_number">Number</label>
-                    <input type="text" class="form-control" name="number" id="field_number" formControlName="number" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
-                        <option value="RENT">RENT</option>
-                        <option value="OTHER">OTHER</option>
-                        <option value="PETITION">PETITION</option>
-                        <option value="INFO">INFO</option>
-                        <option value="REQUEST">REQUEST</option>
-                        <option value="INSPECTION">INSPECTION</option>
-                        <option value="PROJECT">PROJECT</option>
-                        <option value="BUDGET">BUDGET</option>
-                        <option value="REGION">REGION</option>
-                        <option value="TRANSFER">TRANSFER</option>
-                        <option value="RESERVATION">RESERVATION</option>
-                        <option value="VZN">VZN</option>
-                        <option value="CHOICE">CHOICE</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title" formControlName="title" />
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_number">Number</label>
+                            <input type="text" class="form-control" name="number" id="field_number"
+                                formControlName="number" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_type">Type</label>
+                            <select class="form-control" name="type" formControlName="type" id="field_type">
+                                <option value="RENT">RENT</option>
+                                <option value="OTHER">OTHER</option>
+                                <option value="PETITION">PETITION</option>
+                                <option value="INFO">INFO</option>
+                                <option value="REQUEST">REQUEST</option>
+                                <option value="INSPECTION">INSPECTION</option>
+                                <option value="PROJECT">PROJECT</option>
+                                <option value="BUDGET">BUDGET</option>
+                                <option value="REGION">REGION</option>
+                                <option value="TRANSFER">TRANSFER</option>
+                                <option value="RESERVATION">RESERVATION</option>
+                                <option value="VZN">VZN</option>
+                                <option value="CHOICE">CHOICE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
@@ -64,22 +72,6 @@
                     <select class="form-control" id="field_creators" multiple name="creators"
                         formControlName="creators">
                         <option [ngValue]="getSelected(editForm.get('creators').value, personOption)"
-                            *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="field_voteFors">Vote For</label>
-                    <select class="form-control" id="field_voteFors" multiple name="voteFors"
-                        formControlName="voteFors">
-                        <option [ngValue]="getSelected(editForm.get('voteFors').value, personOption)"
-                            *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="field_voteAgainsts">Vote Against</label>
-                    <select class="form-control" id="field_voteAgainsts" multiple name="voteAgainsts"
-                        formControlName="voteAgainsts">
-                        <option [ngValue]="getSelected(editForm.get('voteAgainsts').value, personOption)"
                             *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
                     </select>
                 </div>
@@ -134,8 +126,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="field_description{{i}}">Description</label>
-                        <input type="text" class="form-control" name="field_description{{i}}" id="field_description{{i}}"
-                            [formControl]="decision.controls.description" />
+                        <input type="text" class="form-control" name="field_description{{i}}"
+                            id="field_description{{i}}" [formControl]="decision.controls.description" />
                     </div>
                     <div
                         *ngIf="decision.get('description').invalid && (decision.get('description').dirty || decision.get('description').touched)">
@@ -143,9 +135,9 @@
                             This field is required.
                         </small>
                     </div>
-                    <a (click)="deleteDecision(i)" type="button" class="btn btn-secondary">Delete decision</a>
+                    <span (click)="deleteDecision(i)" class="badge badge-pill badge-danger">Delete decision</span>
                 </div>
-                <a (click)="addDecision()" type="button" class="btn btn-secondary">Add decision</a>
+                <span (click)="addDecision()" class="badge badge-pill badge-primary">Add decision</span>
             </div>
 
             <div>
@@ -157,6 +149,24 @@
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
-        </form>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="field_voteFors">Vote For</label>
+                <select class="form-control" id="field_voteFors" multiple name="voteFors" size="{{people?.length}}"
+                    formControlName="voteFors">
+                    <option [ngValue]="getSelected(editForm.get('voteFors').value, personOption)"
+                        *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="field_voteAgainsts">Vote Against</label>
+                <select class="form-control" id="field_voteAgainsts" multiple name="voteAgainsts"
+                    size="{{people?.length}}" formControlName="voteAgainsts">
+                    <option [ngValue]="getSelected(editForm.get('voteAgainsts').value, personOption)"
+                        *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+                </select>
+            </div>
+        </div>
     </div>
-</div>
+</form>

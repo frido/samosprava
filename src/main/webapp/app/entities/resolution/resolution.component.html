@@ -22,15 +22,6 @@
                     {{resolution.title}}
                 </a>
             </h5>
-            <small>
-                <span *ngFor="let creators of resolution.creators; let last = last">
-                    <a class="form-control-static"
-                        [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>
-                </span>
-            </small>
-            <!-- TODO: fix rights
-            <a class="form-control-static" [routerLink]="['/resolution', resolution.id, 'edit']">EDIT</a>
-            -->
         </li>
     </ul>
 </div>
