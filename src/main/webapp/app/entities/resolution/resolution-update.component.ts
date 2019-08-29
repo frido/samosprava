@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IResolution, Resolution } from 'app/shared/model/resolution.model';
-import { ResolutionService } from './resolution.service';
+import { ResolutionService } from '../../shared/resolution.service';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
 import { ICouncil } from 'app/shared/model/council.model';

@@ -12,6 +12,7 @@ import {
   councilPopupRoute
 } from './';
 import { SamospravaResolutionModule } from '../resolution/resolution.module';
+import { CouncilResolutionsComponent } from './council-resolutions.component';
 
 const ENTITY_STATES = [...councilRoute, ...councilPopupRoute];
 
@@ -22,7 +23,8 @@ const ENTITY_STATES = [...councilRoute, ...councilPopupRoute];
     CouncilDetailComponent,
     CouncilUpdateComponent,
     CouncilDeleteDialogComponent,
-    CouncilDeletePopupComponent
+    CouncilDeletePopupComponent,
+    CouncilResolutionsComponent
   ],
   entryComponents: [CouncilComponent, CouncilUpdateComponent, CouncilDeleteDialogComponent, CouncilDeletePopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

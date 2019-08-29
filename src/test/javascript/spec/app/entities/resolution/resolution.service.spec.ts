@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { ResolutionService } from 'app/entities/resolution/resolution.service';
+import { ResolutionService } from 'app/shared/resolution.service';
 import { IResolution, Resolution, ResolutionType } from 'app/shared/model/resolution.model';
 
 describe('Service Tests', () => {

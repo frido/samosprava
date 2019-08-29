@@ -1,0 +1,9 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let resolution of resolutions ;trackBy: trackId">
+        <h5 class="mb-1">
+            <a [routerLink]="['/resolution', resolution.id, 'view' ]">
+                {{resolution.title}}
+            </a>
+        </h5>
+    </li>
+</ul>

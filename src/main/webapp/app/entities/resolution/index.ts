@@ -1,4 +1,4 @@
-export * from './resolution.service';
+export * from '../../shared/resolution.service';
 export * from './resolution-update.component';
 export * from './resolution-delete-dialog.component';
 export * from './resolution-detail.component';

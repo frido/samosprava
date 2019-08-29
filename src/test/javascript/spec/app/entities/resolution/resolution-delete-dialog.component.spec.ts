@@ -6,7 +6,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { SamospravaTestModule } from '../../../test.module';
 import { ResolutionDeleteDialogComponent } from 'app/entities/resolution/resolution-delete-dialog.component';
-import { ResolutionService } from 'app/entities/resolution/resolution.service';
+import { ResolutionService } from 'app/shared/resolution.service';
 
 describe('Component Tests', () => {
   describe('Resolution Management Delete Component', () => {

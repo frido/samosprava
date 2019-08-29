@@ -11,7 +11,8 @@ import { CouncilDetailComponent } from './council-detail.component';
 import { CouncilUpdateComponent } from './council-update.component';
 import { CouncilDeletePopupComponent } from './council-delete-dialog.component';
 import { ICouncil } from 'app/shared/model/council.model';
-import { ResolutionCouncilComponent } from '../resolution/resolution-council.component';
+import { ResolutionEmbeddedComponent } from 'app/shared/model/resolution-embedded.component';
+import { CouncilResolutionsComponent } from './council-resolutions.component';
 
 @Injectable({ providedIn: 'root' })
 export class CouncilResolve implements Resolve<ICouncil> {
@@ -77,7 +78,7 @@ export const councilRoute: Routes = [
   },
   {
     path: ':id/resolutions',
-    component: ResolutionCouncilComponent,
+    component: CouncilResolutionsComponent,
     resolve: {
       council: CouncilResolve
     },

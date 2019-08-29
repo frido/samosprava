@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IResolution } from 'app/shared/model/resolution.model';
 import { AccountService } from 'app/core';
-import { ResolutionService } from './resolution.service';
+import { ResolutionService } from '../../shared/resolution.service';
 
 @Component({
   selector: 'jhi-resolution',

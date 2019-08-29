@@ -5,13 +5,12 @@ import { UserRouteAccessService } from 'app/core';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Resolution } from 'app/shared/model/resolution.model';
-import { ResolutionService } from './resolution.service';
+import { ResolutionService } from '../../shared/resolution.service';
 import { ResolutionComponent } from './resolution.component';
 import { ResolutionDetailComponent } from './resolution-detail.component';
 import { ResolutionUpdateComponent } from './resolution-update.component';
 import { ResolutionDeletePopupComponent } from './resolution-delete-dialog.component';
 import { IResolution } from 'app/shared/model/resolution.model';
-import { ResolutionCouncilComponent } from './resolution-council.component';
 
 @Injectable({ providedIn: 'root' })
 export class ResolutionResolve implements Resolve<IResolution> {

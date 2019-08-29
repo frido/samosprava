@@ -5,7 +5,7 @@ import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 import { JhiEventManager } from 'ng-jhipster';
 
 import { IResolution } from 'app/shared/model/resolution.model';
-import { ResolutionService } from './resolution.service';
+import { ResolutionService } from '../../shared/resolution.service';
 
 @Component({
   selector: 'jhi-resolution-delete-dialog',

@@ -5,7 +5,7 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { SamospravaTestModule } from '../../../test.module';
 import { ResolutionComponent } from 'app/entities/resolution/resolution.component';
-import { ResolutionService } from 'app/entities/resolution/resolution.service';
+import { ResolutionService } from 'app/shared/resolution.service';
 import { Resolution } from 'app/shared/model/resolution.model';
 
 describe('Component Tests', () => {

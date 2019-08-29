@@ -6,13 +6,13 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IResolution } from 'app/shared/model/resolution.model';
 import { AccountService } from 'app/core';
-import { ResolutionService } from './resolution.service';
+import { ResolutionService } from 'app/shared/resolution.service';
 
 @Component({
-  selector: 'jhi-resolution-council',
-  templateUrl: './resolution-council.component.html'
+  selector: 'jhi-resolution-embedded',
+  templateUrl: './resolution-embedded.component.html'
 })
-export class ResolutionCouncilComponent implements OnInit, OnDestroy {
+export class ResolutionEmbeddedComponent implements OnInit, OnDestroy {
   resolutions: IResolution[];
   currentAccount: any;
   eventSubscriber: Subscription;

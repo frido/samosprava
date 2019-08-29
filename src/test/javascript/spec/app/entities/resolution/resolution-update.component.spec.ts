@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 
 import { SamospravaTestModule } from '../../../test.module';
 import { ResolutionUpdateComponent } from 'app/entities/resolution/resolution-update.component';
-import { ResolutionService } from 'app/entities/resolution/resolution.service';
+import { ResolutionService } from 'app/shared/resolution.service';
 import { Resolution } from 'app/shared/model/resolution.model';
 
 describe('Component Tests', () => {
