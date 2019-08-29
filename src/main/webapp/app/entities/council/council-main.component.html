@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="council">
+            <h2><span>Council</span> {{council.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Key</span></dt>
+                <dd>
+                    <span>{{council.key}}</span>
+                </dd>
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{council.name}}</span>
+                </dd>
+                <dt><span>Deputy Title</span></dt>
+                <dd>
+                    <span>{{council.deputyTitle}}</span>
+                </dd>
+                <dt><span>Mayor Title</span></dt>
+                <dd>
+                    <span>{{council.mayorTitle}}</span>
+                </dd>
+                <dt><span>Office Title</span></dt>
+                <dd>
+                    <span>{{council.officeTitle}}</span>
+                </dd>
+                <dt><span>Fb Title</span></dt>
+                <dd>
+                    <span>{{council.fbTitle}}</span>
+                </dd>
+                <dt><span>Fb Link</span></dt>
+                <dd>
+                    <span>{{council.fbLink}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/council', council.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

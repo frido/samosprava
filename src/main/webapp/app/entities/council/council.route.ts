@@ -13,6 +13,7 @@ import { CouncilDeletePopupComponent } from './council-delete-dialog.component';
 import { ICouncil } from 'app/shared/model/council.model';
 import { ResolutionEmbeddedComponent } from 'app/shared/model/resolution-embedded.component';
 import { CouncilResolutionsComponent } from './council-resolutions.component';
+import { CouncilMainComponent } from './council-main.component';
 
 @Injectable({ providedIn: 'root' })
 export class CouncilResolve implements Resolve<ICouncil> {
@@ -67,6 +68,18 @@ export const councilRoute: Routes = [
   {
     path: ':id/edit',
     component: CouncilUpdateComponent,
+    resolve: {
+      council: CouncilResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'Councils'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/main',
+    component: CouncilMainComponent,
     resolve: {
       council: CouncilResolve
     },
