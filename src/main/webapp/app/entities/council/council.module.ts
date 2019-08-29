@@ -11,6 +11,7 @@ import {
   councilRoute,
   councilPopupRoute
 } from './';
+import { SamospravaResolutionModule } from '../resolution/resolution.module';
 
 const ENTITY_STATES = [...councilRoute, ...councilPopupRoute];
 

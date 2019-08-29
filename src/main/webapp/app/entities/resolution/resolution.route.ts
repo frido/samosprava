@@ -11,6 +11,7 @@ import { ResolutionDetailComponent } from './resolution-detail.component';
 import { ResolutionUpdateComponent } from './resolution-update.component';
 import { ResolutionDeletePopupComponent } from './resolution-delete-dialog.component';
 import { IResolution } from 'app/shared/model/resolution.model';
+import { ResolutionCouncilComponent } from './resolution-council.component';
 
 @Injectable({ providedIn: 'root' })
 export class ResolutionResolve implements Resolve<IResolution> {

@@ -11,6 +11,7 @@ import { CouncilDetailComponent } from './council-detail.component';
 import { CouncilUpdateComponent } from './council-update.component';
 import { CouncilDeletePopupComponent } from './council-delete-dialog.component';
 import { ICouncil } from 'app/shared/model/council.model';
+import { ResolutionCouncilComponent } from '../resolution/resolution-council.component';
 
 @Injectable({ providedIn: 'root' })
 export class CouncilResolve implements Resolve<ICouncil> {
@@ -65,6 +66,18 @@ export const councilRoute: Routes = [
   {
     path: ':id/edit',
     component: CouncilUpdateComponent,
+    resolve: {
+      council: CouncilResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'Councils'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/resolutions',
+    component: ResolutionCouncilComponent,
     resolve: {
       council: CouncilResolve
     },
