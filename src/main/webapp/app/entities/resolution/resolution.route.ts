@@ -11,6 +11,7 @@ import { ResolutionDetailComponent } from './resolution-detail.component';
 import { ResolutionUpdateComponent } from './resolution-update.component';
 import { ResolutionDeletePopupComponent } from './resolution-delete-dialog.component';
 import { IResolution } from 'app/shared/model/resolution.model';
+import { ResolutionMainComponent } from './resolution-main.component';
 
 @Injectable({ providedIn: 'root' })
 export class ResolutionResolve implements Resolve<IResolution> {
@@ -70,6 +71,18 @@ export const resolutionRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
+      pageTitle: 'Resolutions'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/main',
+    component: ResolutionMainComponent,
+    resolve: {
+      resolution: ResolutionResolve
+    },
+    data: {
+      authorities: [],
       pageTitle: 'Resolutions'
     },
     canActivate: [UserRouteAccessService]

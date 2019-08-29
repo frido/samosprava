@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resolution">
+            <h2><span>Resolution</span> {{resolution.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Number</span></dt>
+                <dd>
+                    <span>{{resolution.number}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{resolution.type}}</span>
+                </dd>
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{resolution.title}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{resolution.description}}</span>
+                </dd>
+                <dt><span>Presented</span></dt>
+                <dd>
+                    <span>{{resolution.presented}}</span>
+                </dd>
+                <dt><span>Source</span></dt>
+                <dd>
+                    <span>{{resolution.source}}</span>
+                </dd>
+                <dt><span>Creators</span></dt>
+                <dd>
+                    <span *ngFor="let creators of resolution.creators; let last = last">
+                        <a [routerLink]="['/person', creators?.id, 'view' ]">{{creators.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Vote For</span></dt>
+                <dd>
+                    <span *ngFor="let voteFor of resolution.voteFors; let last = last">
+                        <a [routerLink]="['/person', voteFor?.id, 'view' ]">{{voteFor.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Vote Against</span></dt>
+                <dd>
+                    <span *ngFor="let voteAgainst of resolution.voteAgainsts; let last = last">
+                        <a [routerLink]="['/person', voteAgainst?.id, 'view' ]">{{voteAgainst.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Council</span></dt>
+                <dd>
+                    <div *ngIf="resolution.council">
+                        <a [routerLink]="['/council', resolution.council?.id, 'view']">{{resolution.council?.name}}</a>
+                    </div>
+                </dd>
+                <dt><span>Meeting</span></dt>
+                <dd>
+                    <div *ngIf="resolution.meeting">
+                        <a [routerLink]="['/meeting', resolution.meeting?.id, 'view']">{{resolution.meeting?.date}}</a>
+                    </div>
+                </dd>
+                <dt><span>Decisions</span></dt>
+                <dd>
+                        <dl class="row-md jh-entity-details" *ngFor="let decision of resolution.decisions">
+                            <dt>{{decision.status}}</dt>
+                            <dd>{{decision.description}}</dd>
+                        </dl>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/resolution', resolution.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

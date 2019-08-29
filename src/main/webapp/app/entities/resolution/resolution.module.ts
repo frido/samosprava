@@ -11,6 +11,7 @@ import {
   resolutionRoute,
   resolutionPopupRoute
 } from './';
+import { ResolutionMainComponent } from './resolution-main.component';
 
 const ENTITY_STATES = [...resolutionRoute, ...resolutionPopupRoute];
 
@@ -21,7 +22,8 @@ const ENTITY_STATES = [...resolutionRoute, ...resolutionPopupRoute];
     ResolutionDetailComponent,
     ResolutionUpdateComponent,
     ResolutionDeleteDialogComponent,
-    ResolutionDeletePopupComponent
+    ResolutionDeletePopupComponent,
+    ResolutionMainComponent
   ],
   entryComponents: [ResolutionComponent, ResolutionUpdateComponent, ResolutionDeleteDialogComponent, ResolutionDeletePopupComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
