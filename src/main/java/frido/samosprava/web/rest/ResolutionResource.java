@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import com.mongodb.DBRef;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -86,8 +89,14 @@ public class ResolutionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of resolutions in body.
      */
     @GetMapping("/resolutions")
-    public List<Resolution> getAllResolutions(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Resolution> getAllResolutions(
+            @RequestParam(required = false, defaultValue = "false") boolean eagerload,
+            @RequestParam(required = false) String councilId
+        ) {
         log.debug("REST request to get all Resolutions");
+        if (councilId != null) {
+            return resolutionRepository.findAllWithEagerRelationshipsByCouncilId(councilId);
+        }
         return resolutionRepository.findAllWithEagerRelationships();
     }
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.mongodb.DBRef;
+
 /**
  * Spring Data MongoDB repository for the Resolution entity.
  */
@@ -24,5 +26,8 @@ public interface ResolutionRepository extends MongoRepository<Resolution, String
 
     @Query("{'id': ?0}")
     Optional<Resolution> findOneWithEagerRelationships(String id);
+
+    @Query("{'council.id': ?0}")
+    List<Resolution> findAllWithEagerRelationshipsByCouncilId(String councilId);
 
 }
