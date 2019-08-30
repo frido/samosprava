@@ -52,7 +52,7 @@ public class Person implements Serializable {
     private Set<DepartmentRelation> departmentRelations = new HashSet<>();
 
     @DBRef
-    @Field("commissionRelation")
+    @Field("commissionRelations")
     private Set<CommissionRelation> commissionRelations = new HashSet<>();
 
     @DBRef

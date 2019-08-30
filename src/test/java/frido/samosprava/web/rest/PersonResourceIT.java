@@ -3,6 +3,7 @@ package frido.samosprava.web.rest;
 import frido.samosprava.SamospravaApp;
 import frido.samosprava.domain.Person;
 import frido.samosprava.repository.PersonRepository;
+import frido.samosprava.service.PersonService;
 import frido.samosprava.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -51,6 +52,9 @@ public class PersonResourceIT {
     private PersonRepository personRepository;
 
     @Autowired
+    private PersonService personService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -69,7 +73,7 @@ public class PersonResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PersonResource personResource = new PersonResource(personRepository);
+        final PersonResource personResource = new PersonResource(personRepository, personService);
         this.restPersonMockMvc = MockMvcBuilders.standaloneSetup(personResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -171,7 +175,7 @@ public class PersonResourceIT {
             .andExpect(jsonPath("$.[*].club").value(hasItem(DEFAULT_CLUB.toString())))
             .andExpect(jsonPath("$.[*].facebook").value(hasItem(DEFAULT_FACEBOOK.toString())));
     }
-    
+
     @Test
     public void getPerson() throws Exception {
         // Initialize the database

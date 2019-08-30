@@ -28,7 +28,8 @@ public class Vote implements Serializable {
 
     @DBRef
     @Field("deputy")
-    @com.fasterxml.jackson.annotation.JsonBackReference
+    //@com.fasterxml.jackson.annotation.JsonBackReference
+    @JsonIgnore
     private DeputyRelation deputy;
 
     @DBRef
@@ -38,7 +39,7 @@ public class Vote implements Serializable {
 
     @DBRef
     @Field("person")
-    @JsonIgnoreProperties("votes")
+    @JsonIgnoreProperties({"votes", "deputyRelations", "councilRelations", "commissionRelations"})
     private Person person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

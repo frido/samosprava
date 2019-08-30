@@ -11,6 +11,7 @@ import { PersonDetailComponent } from './person-detail.component';
 import { PersonUpdateComponent } from './person-update.component';
 import { PersonDeletePopupComponent } from './person-delete-dialog.component';
 import { IPerson } from 'app/shared/model/person.model';
+import { PersonMainComponent } from './person-main.component';
 
 @Injectable({ providedIn: 'root' })
 export class PersonResolve implements Resolve<IPerson> {
@@ -46,6 +47,18 @@ export const personRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
+      pageTitle: 'People'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/main',
+    component: PersonMainComponent,
+    resolve: {
+      person: PersonResolve
+    },
+    data: {
+      authorities: [],
       pageTitle: 'People'
     },
     canActivate: [UserRouteAccessService]

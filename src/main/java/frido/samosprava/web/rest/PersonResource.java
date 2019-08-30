@@ -2,6 +2,7 @@ package frido.samosprava.web.rest;
 
 import frido.samosprava.domain.Person;
 import frido.samosprava.repository.PersonRepository;
+import frido.samosprava.service.PersonService;
 import frido.samosprava.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -33,9 +34,11 @@ public class PersonResource {
     private String applicationName;
 
     private final PersonRepository personRepository;
+    private final PersonService personService;
 
-    public PersonResource(PersonRepository personRepository) {
+    public PersonResource(PersonRepository personRepository, PersonService personService) {
         this.personRepository = personRepository;
+        this.personService = personService;
     }
 
     /**
@@ -85,8 +88,11 @@ public class PersonResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of people in body.
      */
     @GetMapping("/people")
-    public List<Person> getAllPeople() {
+    public List<Person> getAllPeople(@RequestParam(required = false) String councilId) {
         log.debug("REST request to get all People");
+        if (councilId != null) {
+            return personService.findAllPersonsByCouncilId(councilId);
+        }
         return personRepository.findAll();
     }
 

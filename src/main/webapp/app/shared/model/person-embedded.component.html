@@ -1,0 +1,16 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let person of persons ;trackBy: trackId">
+        <h5 class="mb-1">
+            <a [routerLink]="['/person', person.id, 'main' ]">
+                {{person.name}}
+            </a>
+            Councils
+            <div *ngFor="let councilRel of person.councilRelations">
+                {{councilRel.type}} - {{councilRel.council.name}}
+            </div>
+            <div *ngFor="let deputyRel of person.deputyRelations">
+                {{deputyRel.vote.votes}} ({{deputyRel.vote.party}}) - {{deputyRel.vote.election.council.name}}
+            </div>
+        </h5>
+    </li>
+</ul>

@@ -14,6 +14,7 @@ import { ICouncil } from 'app/shared/model/council.model';
 import { ResolutionEmbeddedComponent } from 'app/shared/model/resolution-embedded.component';
 import { CouncilResolutionsComponent } from './council-resolutions.component';
 import { CouncilMainComponent } from './council-main.component';
+import { CouncilPersonsComponent } from './council-persons.component';
 
 @Injectable({ providedIn: 'root' })
 export class CouncilResolve implements Resolve<ICouncil> {
@@ -84,7 +85,7 @@ export const councilRoute: Routes = [
       council: CouncilResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'Councils'
     },
     canActivate: [UserRouteAccessService]
@@ -96,7 +97,19 @@ export const councilRoute: Routes = [
       council: CouncilResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
+      pageTitle: 'Councils'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/persons',
+    component: CouncilPersonsComponent,
+    resolve: {
+      council: CouncilResolve
+    },
+    data: {
+      authorities: [],
       pageTitle: 'Councils'
     },
     canActivate: [UserRouteAccessService]
