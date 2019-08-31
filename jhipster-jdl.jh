@@ -78,6 +78,10 @@ entity Decision {
     description String
 }
 
+entity Budget {
+
+}
+
 enum ResolutionType {
 	RENT, OTHER, PETITION, INFO, REQUEST, INSPECTION, PROJECT, BUDGET, REGION, TRANSFER, RESERVATION, VZN, CHOICE
 }

@@ -1,0 +1,14 @@
+{
+    "name": "Budget",
+    "fields": [],
+    "relationships": [],
+    "changelogDate": "20190831111046",
+    "entityTableName": "budget",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
