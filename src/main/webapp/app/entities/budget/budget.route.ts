@@ -11,6 +11,7 @@ import { BudgetDetailComponent } from './budget-detail.component';
 import { BudgetUpdateComponent } from './budget-update.component';
 import { BudgetDeletePopupComponent } from './budget-delete-dialog.component';
 import { IBudget } from 'app/shared/model/budget.model';
+import { BudgetMainComponent } from './budget-main.component';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetResolve implements Resolve<IBudget> {
@@ -70,6 +71,18 @@ export const budgetRoute: Routes = [
     },
     data: {
       authorities: ['ROLE_USER'],
+      pageTitle: 'Budgets'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/main',
+    component: BudgetMainComponent,
+    resolve: {
+      budget: BudgetResolve
+    },
+    data: {
+      authorities: [],
       pageTitle: 'Budgets'
     },
     canActivate: [UserRouteAccessService]
