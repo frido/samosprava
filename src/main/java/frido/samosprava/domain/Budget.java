@@ -32,6 +32,7 @@ public class Budget implements Serializable {
     private Set<Sumar> sumar = new HashSet<>();
     private Set<Prijmy> prijmy = new HashSet<>();
     private Set<Vydavky> vydavky = new HashSet<>();
+
     public String getId() {
         return id;
     }
