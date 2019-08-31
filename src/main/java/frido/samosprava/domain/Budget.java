@@ -1,10 +1,15 @@
 package frido.samosprava.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import java.io.Serializable;
 
 /**
  * A Budget.
@@ -17,17 +22,35 @@ public class Budget implements Serializable {
     @Id
     private String id;
 
+    @DBRef
+    @Field("council")
+    @com.fasterxml.jackson.annotation.JsonBackReference
+    private Council council;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
     private Set<Sumar> sumar = new HashSet<>();
     private Set<Prijmy> prijmy = new HashSet<>();
     private Set<Vydavky> vydavky = new HashSet<>();
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Council getCouncil() {
+        return council;
+    }
+
+    public Budget council(Council council) {
+        this.council = council;
+        return this;
+    }
+
+    public void setCouncil(Council council) {
+        this.council = council;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

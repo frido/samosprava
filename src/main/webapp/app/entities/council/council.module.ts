@@ -11,7 +11,6 @@ import {
   councilRoute,
   councilPopupRoute
 } from './';
-import { SamospravaResolutionModule } from '../resolution/resolution.module';
 import { CouncilResolutionsComponent } from './council-resolutions.component';
 import { CouncilMainComponent } from './council-main.component';
 import { CouncilPersonsComponent } from './council-persons.component';
@@ -25,6 +24,7 @@ const ENTITY_STATES = [...councilRoute, ...councilPopupRoute];
     CouncilDetailComponent,
     CouncilUpdateComponent,
     CouncilDeleteDialogComponent,
+    CouncilDeletePopupComponent,
     CouncilDeletePopupComponent,
     CouncilResolutionsComponent,
     CouncilMainComponent,

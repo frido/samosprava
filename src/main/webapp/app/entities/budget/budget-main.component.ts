@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { IBudget } from 'app/shared/model/budget.model';
 
 @Component({
-  selector: 'jhi-budget-detail',
-  templateUrl: './budget-detail.component.html'
+  selector: 'jhi-budget-main',
+  templateUrl: './budget-main.component.html'
 })
-export class BudgetDetailComponent implements OnInit {
+export class BudgetMainComponent implements OnInit {
   budget: IBudget;
 
   constructor(protected activatedRoute: ActivatedRoute) {}

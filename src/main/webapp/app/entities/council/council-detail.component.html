@@ -33,6 +33,12 @@
                 <dd>
                     <span>{{council.fbLink}}</span>
                 </dd>
+                <dt><span>Budget</span></dt>
+                <dd>
+                    <div *ngIf="council.budget">
+                        <a [routerLink]="['/budget', council.budget?.id, 'view']">{{council.budget?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

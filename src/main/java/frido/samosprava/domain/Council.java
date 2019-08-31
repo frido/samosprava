@@ -1,12 +1,12 @@
 package frido.samosprava.domain;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,6 +41,10 @@ public class Council implements Serializable {
 
     @Field("fb_link")
     private String fbLink;
+
+    @DBRef
+    @Field("budget")
+    private Budget budget;
 
     @DBRef
     @Field("deputyRelation")
@@ -175,6 +179,19 @@ public class Council implements Serializable {
 
     public void setFbLink(String fbLink) {
         this.fbLink = fbLink;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public Council budget(Budget budget) {
+        this.budget = budget;
+        return this;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
     }
 
     public Set<DeputyRelation> getDeputyRelations() {

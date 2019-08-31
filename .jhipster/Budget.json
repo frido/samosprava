@@ -1,7 +1,15 @@
 {
     "name": "Budget",
     "fields": [],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "council",
+            "otherEntityRelationshipName": "budget",
+            "relationshipName": "council",
+            "ownerSide": false
+        }
+    ],
     "changelogDate": "20190831111046",
     "entityTableName": "budget",
     "dto": "no",

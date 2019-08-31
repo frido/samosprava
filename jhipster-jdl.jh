@@ -82,6 +82,10 @@ entity Budget {
 
 }
 
+relationship OneToOne {
+  Council{budget} to Budget{council}
+}
+
 enum ResolutionType {
 	RENT, OTHER, PETITION, INFO, REQUEST, INSPECTION, PROJECT, BUDGET, REGION, TRANSFER, RESERVATION, VZN, CHOICE
 }

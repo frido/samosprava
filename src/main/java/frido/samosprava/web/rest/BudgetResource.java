@@ -17,6 +17,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link frido.samosprava.domain.Budget}.
@@ -82,10 +84,18 @@ public class BudgetResource {
      * {@code GET  /budgets} : get all the budgets.
      *
 
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of budgets in body.
      */
     @GetMapping("/budgets")
-    public List<Budget> getAllBudgets() {
+    public List<Budget> getAllBudgets(@RequestParam(required = false) String filter) {
+        if ("council-is-null".equals(filter)) {
+            log.debug("REST request to get all Budgets where council is null");
+            return StreamSupport
+                .stream(budgetRepository.findAll().spliterator(), false)
+                .filter(budget -> budget.getCouncil() == null)
+                .collect(Collectors.toList());
+        }
         log.debug("REST request to get all Budgets");
         return budgetRepository.findAll();
     }

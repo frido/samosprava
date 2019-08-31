@@ -32,6 +32,14 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "budget",
+            "otherEntityRelationshipName": "council",
+            "relationshipName": "budget",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
             "relationshipType": "one-to-many",
             "otherEntityName": "deputyRelation",
             "otherEntityRelationshipName": "council",

@@ -45,6 +45,13 @@
                            formControlName="fbLink"/>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_budget">Budget</label>
+                    <select class="form-control" id="field_budget" name="budget" formControlName="budget">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="budgetOption.id === editForm.get('budget').value?.id ? editForm.get('budget').value : budgetOption" *ngFor="let budgetOption of budgets; trackBy: trackBudgetById">{{budgetOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

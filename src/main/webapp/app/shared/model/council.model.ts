@@ -1,3 +1,4 @@
+import { IBudget } from 'app/shared/model/budget.model';
 import { IDeputyRelation } from 'app/shared/model/deputy-relation.model';
 import { IElection } from 'app/shared/model/election.model';
 import { IResolution } from 'app/shared/model/resolution.model';
@@ -15,6 +16,7 @@ export interface ICouncil {
   officeTitle?: string;
   fbTitle?: string;
   fbLink?: string;
+  budget?: IBudget;
   deputyRelations?: IDeputyRelation[];
   elections?: IElection[];
   resolutions?: IResolution[];
@@ -34,6 +36,7 @@ export class Council implements ICouncil {
     public officeTitle?: string,
     public fbTitle?: string,
     public fbLink?: string,
+    public budget?: IBudget,
     public deputyRelations?: IDeputyRelation[],
     public elections?: IElection[],
     public resolutions?: IResolution[],
