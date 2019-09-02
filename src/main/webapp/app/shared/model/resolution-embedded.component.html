@@ -1,9 +1,9 @@
 <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let resolution of resolutions ;trackBy: trackId">
-        <h5 class="mb-1">
-            <a [routerLink]="['/resolution', resolution.id, 'main' ]">
-                {{resolution.title}}
-            </a>
-        </h5>
-    </li>
+    <a *ngFor="let resolution of resolutions ;trackBy: trackId" [routerLink]="['/resolution', resolution.id, 'main' ]"
+        href="javascript:;" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{resolution.title}}</h5>
+            <small class="text-muted">{{resolution.meeting?.date}}</small>
+        </div>
+    </a>
 </ul>

@@ -17,11 +17,19 @@
 
     <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let resolution of resolutions ;trackBy: trackId">
-            <h5 class="mb-1">
-                <a [routerLink]="['/resolution', resolution.id, 'view' ]">
-                    {{resolution.title}}
-                </a>
-            </h5>
+            <button type="submit" [routerLink]="['/resolution', resolution.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+            </button>
+            <button type="submit" [routerLink]="['/resolution', { outlets: { popup: resolution.id + '/delete'} }]"
+                replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+            </button>
+            <a [routerLink]="['/resolution', resolution.id, 'view' ]">
+                {{resolution.title}}
+            </a>
+
         </li>
     </ul>
 </div>

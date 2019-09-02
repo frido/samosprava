@@ -32,7 +32,7 @@ public class DeputyRelation implements Serializable {
 
     @DBRef
     @Field("person")
-    @JsonIgnoreProperties("deputyRelations")
+    @JsonIgnoreProperties({"deputyRelations", "councilRelations"})
     private Person person;
 
     @DBRef

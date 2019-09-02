@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="council">
-            <h2><span>Council</span> {{council.id}}</h2>
+            <h2>Samosprava {{council.name}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <jhi-resolution-embedded [council]="council"></jhi-resolution-embedded>

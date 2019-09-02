@@ -88,10 +88,15 @@ public class PersonResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of people in body.
      */
     @GetMapping("/people")
-    public List<Person> getAllPeople(@RequestParam(required = false) String councilId) {
+    public List<Person> getAllPeople(
+            @RequestParam(required = false) String councilId,
+            @RequestParam(required = false, defaultValue = "false") Boolean council,
+            @RequestParam(required = false, defaultValue = "false") Boolean duty,
+            @RequestParam(required = false, defaultValue = "false") Boolean department
+            ) {
         log.debug("REST request to get all People");
         if (councilId != null) {
-            return personService.findAllPersonsByCouncilId(councilId);
+            return personService.findAllPersonsByCouncilId(councilId, council, duty, department);
         }
         return personRepository.findAll();
     }

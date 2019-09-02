@@ -1,10 +1,12 @@
 package frido.samosprava.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
@@ -23,31 +25,53 @@ public class PersonService {
     private DeputyRelationRepository deputyRelationRepository;
     private DepartmentRelationRepository departmentRelationRepository;
 
-    PersonService(CouncilRelationRepository councilRelationRepository, DeputyRelationRepository deputyRelationRepository, DepartmentRelationRepository departmentRelationRepository) {
+    PersonService(CouncilRelationRepository councilRelationRepository,
+            DeputyRelationRepository deputyRelationRepository,
+            DepartmentRelationRepository departmentRelationRepository) {
         this.councilRelationRepository = councilRelationRepository;
         this.deputyRelationRepository = deputyRelationRepository;
         this.departmentRelationRepository = departmentRelationRepository;
 
     }
 
-    public List<Person> findAllPersonsByCouncilId(String councilId) {
+    public List<Person> findAllPersonsByCouncilId(String councilId, Boolean council, Boolean duty, Boolean department) {
         List<CouncilRelation> cRel = councilRelationRepository.findAll();
         List<DeputyRelation> pRel = deputyRelationRepository.findAll();
         List<DepartmentRelation> dRel = departmentRelationRepository.findAll();
 
-        Stream<Person> cStream = cRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
-            .map(rel -> rel.getPerson());
-        Stream<Person> pStream = pRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
-            .map(rel -> rel.getPerson());
-        Stream<Person> dStream = dRel.stream().filter(rel -> rel.getDepartment().getCouncil().getId().equals(councilId))
-            .map(rel -> rel.getPerson());
+        Stream<Person> cStream = Stream.empty();
+        Stream<Person> pStream = Stream.empty();
+        Stream<Person> dStream = Stream.empty();
 
-        return Stream.of(cStream, pStream, dStream)
-            .flatMap(p -> p)
-            .distinct()
-            .peek(person -> person.setCouncilRelations(cRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-            .peek(person -> person.setDeputyRelations(pRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-            .peek(person -> person.setDepartmentRelations(dRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-            .collect(Collectors.toList());
+        if (council == true) {
+            cStream = cRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
+                    .map(rel -> rel.getPerson());
+        }
+        if (duty == true) {
+            pStream = pRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
+                    .map(rel -> rel.getPerson());
+        }
+        if (department == true) {
+            dStream = dRel.stream().filter(rel -> rel.getDepartment().getCouncil().getId().equals(councilId))
+                    .map(rel -> rel.getPerson());
+        }
+
+        return Stream.of(cStream, pStream, dStream).flatMap(p -> p).distinct()
+                .peek(person -> person.setCouncilRelations(
+                        cRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+                .peek(person -> person.setDeputyRelations(
+                        pRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+                .peek(person -> person.setDepartmentRelations(
+                        dRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+                .sorted(new Comparator<Person>() {
+
+                    @Override
+                    public int compare(Person o1, Person o2) {
+                        String surname1 = o1.getName().split(" ")[1];
+                        String surname2 = o2.getName().split(" ")[1];
+                        return surname1.compareTo(surname2);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }

@@ -9,7 +9,7 @@ import { IResolution, Resolution } from 'app/shared/model/resolution.model';
 import { ResolutionService } from '../../shared/resolution.service';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
-import { ICouncil } from 'app/shared/model/council.model';
+import { ICouncil, Council } from 'app/shared/model/council.model';
 import { CouncilService } from 'app/entities/council';
 import { IMeeting } from 'app/shared/model/meeting.model';
 import { MeetingService } from 'app/entities/meeting';
@@ -61,13 +61,6 @@ export class ResolutionUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ resolution }) => {
       this.updateForm(resolution);
     });
-    this.personService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IPerson[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IPerson[]>) => response.body)
-      )
-      .subscribe((res: IPerson[]) => (this.people = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.councilService
       .query()
       .pipe(
@@ -75,6 +68,13 @@ export class ResolutionUpdateComponent implements OnInit {
         map((response: HttpResponse<ICouncil[]>) => response.body)
       )
       .subscribe((res: ICouncil[]) => (this.councils = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.personService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IPerson[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IPerson[]>) => response.body)
+      )
+      .subscribe((res: IPerson[]) => (this.people = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.meetingService
       .query()
       .pipe(
@@ -82,6 +82,16 @@ export class ResolutionUpdateComponent implements OnInit {
         map((response: HttpResponse<IMeeting[]>) => response.body)
       )
       .subscribe((res: IMeeting[]) => (this.meetings = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.editForm.get(['council']).valueChanges.subscribe((val: Council) => {
+      console.log(val.id);
+      this.personService
+        .query({ councilId: val.id, duty: true })
+        .pipe(
+          filter((mayBeOk: HttpResponse<IPerson[]>) => mayBeOk.ok),
+          map((response: HttpResponse<IPerson[]>) => response.body)
+        )
+        .subscribe((res: IPerson[]) => (this.people = res), (res: HttpErrorResponse) => this.onError(res.message));
+    });
   }
 
   updateForm(resolution: IResolution) {
