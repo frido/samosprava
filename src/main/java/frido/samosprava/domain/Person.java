@@ -155,7 +155,7 @@ public class Person implements Serializable {
 
     public Person addDeputyRelation(DeputyRelation deputyRelation) {
         this.deputyRelations.add(deputyRelation);
-        deputyRelation.setPerson(this);
+        // deputyRelation.setPerson(this);
         return this;
     }
 
@@ -205,7 +205,7 @@ public class Person implements Serializable {
 
     public Person addCouncilRelation(CouncilRelation councilRelation) {
         this.councilRelations.add(councilRelation);
-        councilRelation.setPerson(this);
+        // councilRelation.setPerson(this);
         return this;
     }
 
@@ -255,7 +255,7 @@ public class Person implements Serializable {
 
     public Person addCommissionRelation(CommissionRelation commissionRelation) {
         this.commissionRelations.add(commissionRelation);
-        commissionRelation.setPerson(this);
+        // commissionRelation.setPerson(this);
         return this;
     }
 

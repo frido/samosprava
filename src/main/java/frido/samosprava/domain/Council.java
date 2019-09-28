@@ -205,7 +205,7 @@ public class Council implements Serializable {
 
     public Council addDeputyRelation(DeputyRelation deputyRelation) {
         this.deputyRelations.add(deputyRelation);
-        deputyRelation.setCouncil(this);
+        // deputyRelation.setCouncil(this);
         return this;
     }
 
@@ -280,7 +280,7 @@ public class Council implements Serializable {
 
     public Council addCouncilRelation(CouncilRelation councilRelation) {
         this.councilRelations.add(councilRelation);
-        councilRelation.setCouncil(this);
+        // councilRelation.setCouncil(this);
         return this;
     }
 

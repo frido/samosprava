@@ -88,7 +88,9 @@ public class DeputyRelationResource {
     @GetMapping("/deputy-relations")
     public List<DeputyRelation> getAllDeputyRelations() {
         log.debug("REST request to get all DeputyRelations");
-        return deputyRelationRepository.findAll();
+        List<DeputyRelation> xxx = deputyRelationRepository.findAll();
+        System.out.println(xxx);
+        return xxx;
     }
 
     /**

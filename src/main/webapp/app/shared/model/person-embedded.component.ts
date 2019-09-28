@@ -29,7 +29,7 @@ export class PersonEmbeddedComponent implements OnInit, OnDestroy {
 
   loadAll() {
     this.personService
-      .query({ councilId: this.council.id })
+      .query({ councilId: this.council.id, council: true, duty: true, department: true })
       .pipe(
         filter((res: HttpResponse<IPerson[]>) => res.ok),
         map((res: HttpResponse<IPerson[]>) => res.body)

@@ -39,39 +39,40 @@ public class PersonService {
         List<DeputyRelation> pRel = deputyRelationRepository.findAll();
         List<DepartmentRelation> dRel = departmentRelationRepository.findAll();
 
-        Stream<Person> cStream = Stream.empty();
-        Stream<Person> pStream = Stream.empty();
-        Stream<Person> dStream = Stream.empty();
+        Stream<PersonService> cStream = Stream.empty();
+        Stream<PersonService> pStream = Stream.empty();
+        Stream<PersonService> dStream = Stream.empty();
 
-        if (council == true) {
-            cStream = cRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
-                    .map(rel -> rel.getPerson());
-        }
-        if (duty == true) {
-            pStream = pRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
-                    .map(rel -> rel.getPerson());
-        }
-        if (department == true) {
-            dStream = dRel.stream().filter(rel -> rel.getDepartment().getCouncil().getId().equals(councilId))
-                    .map(rel -> rel.getPerson());
-        }
+        // if (council == true) {
+        //     cStream = cRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
+        //             .map(rel -> rel.getPerson());
+        // }
+        // if (duty == true) {
+        //     pStream = pRel.stream().filter(rel -> rel.getCouncil().getId().equals(councilId))
+        //             .map(rel -> rel.getPerson());
+        // }
+        // if (department == true) {
+        //     dStream = dRel.stream().filter(rel -> rel.getDepartment().getCouncil().getId().equals(councilId))
+        //             .map(rel -> rel.getPerson());
+        // }
 
-        return Stream.of(cStream, pStream, dStream).flatMap(p -> p).distinct()
-                .peek(person -> person.setCouncilRelations(
-                        cRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-                .peek(person -> person.setDeputyRelations(
-                        pRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-                .peek(person -> person.setDepartmentRelations(
-                        dRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
-                .sorted(new Comparator<Person>() {
+        // return Stream.of(cStream, pStream, dStream).flatMap(p -> p).distinct()
+        //         .peek(person -> person.setCouncilRelations(
+        //                 cRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+        //         .peek(person -> person.setDeputyRelations(
+        //                 pRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+        //         .peek(person -> person.setDepartmentRelations(
+        //                 dRel.stream().filter(rel -> rel.getPerson().equals(person)).collect(Collectors.toSet())))
+        //         .sorted(new Comparator<Person>() {
 
-                    @Override
-                    public int compare(Person o1, Person o2) {
-                        String surname1 = o1.getName().split(" ")[1];
-                        String surname2 = o2.getName().split(" ")[1];
-                        return surname1.compareTo(surname2);
-                    }
-                })
-                .collect(Collectors.toList());
+        //             @Override
+        //             public int compare(Person o1, Person o2) {
+        //                 String surname1 = o1.getName().split(" ")[1];
+        //                 String surname2 = o2.getName().split(" ")[1];
+        //                 return surname1.compareTo(surname2);
+        //             }
+        //         })
+        //         .collect(Collectors.toList());
+        return null;
     }
 }

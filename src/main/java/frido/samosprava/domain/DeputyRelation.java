@@ -28,17 +28,17 @@ public class DeputyRelation implements Serializable {
 
     @DBRef
     @Field("vote")
-    private Vote vote;
+    private VoteSimple vote;
 
     @DBRef
     @Field("person")
     @JsonIgnoreProperties({"deputyRelations", "councilRelations"})
-    private Person person;
+    private PersonSimple person;
 
     @DBRef
     @Field("council")
     @JsonIgnoreProperties("deputyRelations")
-    private Council council;
+    private CouncilSimple council;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -75,42 +75,42 @@ public class DeputyRelation implements Serializable {
         this.to = to;
     }
 
-    public Vote getVote() {
+    public VoteSimple getVote() {
         return vote;
     }
 
-    public DeputyRelation vote(Vote vote) {
+    public DeputyRelation vote(VoteSimple vote) {
         this.vote = vote;
         return this;
     }
 
-    public void setVote(Vote vote) {
+    public void setVote(VoteSimple vote) {
         this.vote = vote;
     }
 
-    public Person getPerson() {
+    public PersonSimple getPerson() {
         return person;
     }
 
-    public DeputyRelation person(Person person) {
+    public DeputyRelation person(PersonSimple person) {
         this.person = person;
         return this;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(PersonSimple person) {
         this.person = person;
     }
 
-    public Council getCouncil() {
+    public CouncilSimple getCouncil() {
         return council;
     }
 
-    public DeputyRelation council(Council council) {
+    public DeputyRelation council(CouncilSimple council) {
         this.council = council;
         return this;
     }
 
-    public void setCouncil(Council council) {
+    public void setCouncil(CouncilSimple council) {
         this.council = council;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

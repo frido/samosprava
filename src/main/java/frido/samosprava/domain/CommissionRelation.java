@@ -39,7 +39,7 @@ public class CommissionRelation implements Serializable {
     @DBRef
     @Field("person")
     @JsonIgnoreProperties("commissionRelations")
-    private Person person;
+    private PersonSimple person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -102,16 +102,16 @@ public class CommissionRelation implements Serializable {
         this.commission = commission;
     }
 
-    public Person getPerson() {
+    public PersonSimple getPerson() {
         return person;
     }
 
-    public CommissionRelation person(Person person) {
+    public CommissionRelation person(PersonSimple person) {
         this.person = person;
         return this;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(PersonSimple person) {
         this.person = person;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

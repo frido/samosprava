@@ -34,12 +34,12 @@ public class CouncilRelation implements Serializable {
     @DBRef
     @Field("council")
     @JsonIgnoreProperties("councilRelations")
-    private Council council;
+    private CouncilSimple council;
 
     @DBRef
     @Field("person")
     @JsonIgnoreProperties("councilRelations")
-    private Person person;
+    private PersonSimple person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -89,29 +89,29 @@ public class CouncilRelation implements Serializable {
         this.type = type;
     }
 
-    public Council getCouncil() {
+    public CouncilSimple getCouncil() {
         return council;
     }
 
-    public CouncilRelation council(Council council) {
+    public CouncilRelation council(CouncilSimple council) {
         this.council = council;
         return this;
     }
 
-    public void setCouncil(Council council) {
+    public void setCouncil(CouncilSimple council) {
         this.council = council;
     }
 
-    public Person getPerson() {
+    public PersonSimple getPerson() {
         return person;
     }
 
-    public CouncilRelation person(Person person) {
+    public CouncilRelation person(PersonSimple person) {
         this.person = person;
         return this;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(PersonSimple person) {
         this.person = person;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
