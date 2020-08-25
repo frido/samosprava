@@ -1,4 +1,8 @@
-# samosprava
+# Samosprava
+
+Web-based management tool for the data used by the *Government* page
+
+I used [JHipster](https://www.jhipster.tech/) as the development platform. The backend is built on [Spring Boot](https://spring.io/projects/spring-boot). The frontend is an [Angular](https://angular.io/) application. The data were stored in [MongoDB](https://www.mongodb.com/) provided by [mLab](https://mlab.com/). The application was deployed on [Heroku](https://www.heroku.com/home#). Due to newly introduced restrictions I was forced to remove the data.
 
 This application was generated using JHipster 6.2.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.2.0](https://www.jhipster.tech/documentation-archive/v6.2.0).
 
